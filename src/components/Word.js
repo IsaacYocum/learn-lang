@@ -3,7 +3,6 @@ import WordDetails from './WordDetails'
 
 const Word = ({ word }) => {
     const [showWordDetails, setShowWordDetails] = useState(false)
-    const [wordDetails, setWordDetails] = useState()
 
     if (showWordDetails) {
         console.log(`mouse enter! ${word}`)
