@@ -8,8 +8,9 @@ const Text = () => {
         fetch(sample)
             .then(r => r.text())
             .then(text => {
-                console.log(text)
-                setSampleText(text.split(' '))
+                // setSampleText(text.split(' '))
+                setSampleText(text.match(/\b(\w+\W+)/g))
+
             })
     }, [])
 
@@ -17,8 +18,8 @@ const Text = () => {
         <div>
             <p>Text</p>
             <span>
-                {sampleText.map(word => {
-                    return <Word key={word} word={word}/>
+                {sampleText.map((word, i) => {
+                    return <Word key={i} word={word.trim()} />
                 })}
             </span>
         </div>

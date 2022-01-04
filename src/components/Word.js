@@ -1,20 +1,37 @@
-import React, { useState } from 'react'
+import React from 'react'
 import WordDetails from './WordDetails'
+import './WordDetails.css'
 
 const Word = ({ word }) => {
-    const [showWordDetails, setShowWordDetails] = useState(false)
+    // Remove punctuation from words
+    let punctuation = '';
+    if (word.includes('.')) {
+        punctuation = '.';
+        word = word.replace('.', '')
+    }
 
-    if (showWordDetails) {
-        console.log(`mouse enter! ${word}`)
+    if (word.includes(',')) {
+        punctuation = ',';
+        word = word.replace(',', '')
+    }
+
+    if (word.includes(';')) {
+        punctuation = ';';
+        word = word.replace(';', '')
+    }
+
+    if (word.includes(':')) {
+        punctuation = ':';
+        word = word.replace(':', '')
     }
 
     return (
-        <div style={{ display: 'inline' }}>
-            <WordDetails word={word} show={showWordDetails}/>
-            <span
-                onMouseEnter={() => setShowWordDetails(true)}
-                onMouseLeave={() => setShowWordDetails(false)}>
-                {word}&nbsp;
+        <div className='tooltip'>
+            <WordDetails word={word} />
+            <span>
+                <span className='hover-highlight'>{word}</span>
+                {punctuation}
+                &nbsp;
             </span>
         </div>
     )

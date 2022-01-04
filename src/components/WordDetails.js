@@ -1,15 +1,14 @@
 import React from 'react'
+import './WordDetails.css'
 
-const WordDetails = ({ word, show }) => {
-    if (show) {
-        return (
-            <div>
+const WordDetails = ({ word }) => {
+    return (
+        <div>
+            <span className="tooltiptext">
                 {word}
-            </div>
-        )
-    } else {
-        return <></>
-    }
+            </span>
+        </div>
+    )
 }
 
 export default WordDetails
