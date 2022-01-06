@@ -1,6 +1,6 @@
 {
     "language": "english",
-    "paragraphSplits": "/r/n",
-    "sentenceSplits": ".!?:;",
-    "wordSplits": "a-zA-ZÀ-ÖØ-öø-ȳ"
+    "paragraphRegex": "[\r\n]+",
+    "sentenceRegex": "([^.!?]+[.!?]+)",
+    "wordRegex": "(?![a-zA-ZÀ-ÖØ-öø-ȳ]+)"
 }

@@ -5,8 +5,8 @@ import GS from '../globalSettings.json'
 const Paragraph = ({ paragraph }) => {
     const [sentences, setSentences] = useState([])
     useEffect(() => {
-        let regex = new RegExp(`(?=[${GS.sentenceSplits}])`, "g")
-        setSentences(sentences.concat(paragraph.split(regex)))
+        let regex = new RegExp(GS.sentenceRegex, "g")
+        setSentences(sentences.concat(paragraph.match(regex)))
     }, [])
 
     return (

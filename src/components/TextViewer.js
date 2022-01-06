@@ -10,8 +10,8 @@ const Text = (props) => {
         fetch(sample)
             .then(r => r.text())
             .then(text => {
-                let regex = new RegExp(`${GS.paragraphSplits}`)
-                setParagraphs(paragraphs.concat(text.split(/[\r\n]+/)))
+                let regex = new RegExp(GS.paragraphRegex, "g")
+                setParagraphs(paragraphs.concat(text.split(regex)))
             })
     }, [])
 

@@ -5,33 +5,42 @@ import GS from '../globalSettings.json'
 const Sentence = ({ sentence }) => {
     const [words, setWords] = useState([])
     useEffect(() => {
-        let regex = new RegExp(`(?![${GS.wordSplits}]+)`, "g")
+        let regex = new RegExp(GS.wordRegex, "g")
         setWords(words.concat(sentence.split(regex)))
     }, [])
-
-    const punctuations = ['.', ',', ';', ':']
 
     return (
         <>
             {words.map((word, i) => {
+                word = word.trim()
+                let addSpace = true;
                 let isPunctuation = false;
-                let addSpace = false;
+                let nextWord = words[i + 1]
+                let nextWordIsPunctuation = false;
+                let punctuation;
 
-                punctuations.forEach(punctuation => {
-                    console.log(words[i + 1], punctuation)
-                    if (words[i + 1] === punctuation) {
-                        isPunctuation = true;
-                        addSpace = false;
-                    } else {
-                        isPunctuation = false;
+                if (word.includes(".") || word === ',') {
+                    isPunctuation = true;
+                }
+
+                if (nextWord) {
+                    if (nextWord.includes(".") || nextWord === ',') {
+                        if (word.includes(".")) console.log(". found!", word)
                         addSpace = true;
+                        nextWordIsPunctuation = true;
+                        punctuation = nextWord;
                     }
-                })
-                console.log('nextWord', words[i + 1])
-                console.log('isPunctuation', isPunctuation)
-                console.log('addSpace', addSpace)
+                }
 
-                return <Word key={i} word={word.trim()} isPunctuation={isPunctuation} addSpace={addSpace} />
+                if (nextWordIsPunctuation) {
+                    return <Word key={i} word={word} addSpace={addSpace} punctuation={punctuation} />
+                }
+
+                if (!isPunctuation) {
+                    return <Word key={i} word={word} addSpace={addSpace} />
+                }
+
+                return null;
             })}
         </>
     )
