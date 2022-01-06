@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import Text from './components/Text.js'
+import Text from './components/TextViewer.js'
 import Header from './components/Header';
 import Footer from './components/Footer';
 

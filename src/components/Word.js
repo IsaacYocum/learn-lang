@@ -2,38 +2,19 @@ import React from 'react'
 import WordDetails from './WordDetails'
 import './WordDetails.css'
 
-const Word = ({ word }) => {
-    // Remove punctuation from words
-    let punctuation = '';
-    if (word.includes('.')) {
-        punctuation = '.';
-        word = word.replace('.', '')
-    }
+const Word = ({ word, isPunctuation, addSpace }) => {
+    let space = addSpace ? '\xa0' : null;
 
-    if (word.includes(',')) {
-        punctuation = ',';
-        word = word.replace(',', '')
-    }
-
-    if (word.includes(';')) {
-        punctuation = ';';
-        word = word.replace(';', '')
-    }
-
-    if (word.includes(':')) {
-        punctuation = ':';
-        word = word.replace(':', '')
+    if (isPunctuation) {
+        return <>{word + ' '}</>
     }
 
     return (
-        <div className='tooltip'>
+        <span className='tooltip hover-highlight'>
+            {word}
             <WordDetails word={word} />
-            <span>
-                <span className='hover-highlight'>{word}</span>
-                {punctuation}
-                &nbsp;
-            </span>
-        </div>
+            {space}
+        </span>
     )
 }
 

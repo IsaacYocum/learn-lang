@@ -3,11 +3,9 @@ import './WordDetails.css'
 
 const WordDetails = ({ word }) => {
     return (
-        <div>
-            <span className="tooltiptext">
-                {word}
-            </span>
-        </div>
+        <span className="tooltiptext">
+            {word}
+        </span>
     )
 }
 

@@ -1,0 +1,6 @@
+{
+    "language": "english",
+    "paragraphSplits": "/r/n",
+    "sentenceSplits": ".!?:;",
+    "wordSplits": "a-zA-ZÀ-ÖØ-öø-ȳ"
+}

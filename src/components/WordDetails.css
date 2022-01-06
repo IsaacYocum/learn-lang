@@ -11,7 +11,7 @@
     width: 120px;
     background-color: black;
     color: #fff;
-    text-align: center;
+    text-align: left;
     border-radius: 6px;
     padding: 5px 0;
 
@@ -20,20 +20,20 @@
     z-index: 1;
     bottom: 100%;
     left: 50%;
-    margin-left: -60px;
+    margin-left: -35px;
 }
 
-.tooltip .tooltiptext::after {
+/* .tooltip .tooltiptext::after {
     content: " ";
     position: absolute;
-    top: 100%; /* At the bottom of the tooltip */
+    top: 100%; 
     left: 50%;
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
     border-color: black transparent transparent transparent;
-  }
-
+  } 
+*/
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
