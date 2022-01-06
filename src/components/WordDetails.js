@@ -1,5 +1,5 @@
 import React from 'react'
-import './WordDetails.css'
+import './Word.css'
 
 const WordDetails = ({ word }) => {
     return (

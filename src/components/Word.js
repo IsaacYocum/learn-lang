@@ -1,6 +1,6 @@
 import React from 'react'
 import WordDetails from './WordDetails'
-import './WordDetails.css'
+import './Word.css'
 
 const Word = ({ word, addSpace, punctuation }) => {
     if (word.includes(".")) console.log(". found!", word)
@@ -9,7 +9,7 @@ const Word = ({ word, addSpace, punctuation }) => {
 
     return (
         <span className='tooltip'>
-            <span className='hover-highlight'>{word}</span>
+            <span className='word hover-highlight'>{word}</span>
             {punc}
             {space}
             <WordDetails word={word} />
