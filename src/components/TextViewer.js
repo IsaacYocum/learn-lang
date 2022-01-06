@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import sample from '../texts/sample.txt'
+// import sample from '../texts/sample.txt'
 import Paragraph from './Paragraph'
 import GS from '../globalSettings.json'
 import './TextViewer.css'
@@ -7,7 +7,7 @@ import './TextViewer.css'
 const Text = (props) => {
     const [paragraphs, setParagraphs] = useState([])
     useEffect(() => {
-        fetch(sample)
+        fetch('http://localhost:3001/api/texts')
             .then(r => r.text())
             .then(text => {
                 let regex = new RegExp(GS.paragraphRegex, "g")

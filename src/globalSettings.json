@@ -1,4 +1,7 @@
 {
+    "server": {
+        "port": 3001
+    },
     "language": "english",
     "paragraphRegex": "[\r\n]+",
     "sentenceRegex": "([^.!?]+[.!?]+)",
