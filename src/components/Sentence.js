@@ -7,7 +7,7 @@ const Sentence = ({ sentence }) => {
     useEffect(() => {
         let regex = new RegExp(GS.wordRegex, "g")
         setWords(words.concat(sentence.split(regex)))
-    }, [])
+    }, [setWords])
 
     return (
         <>

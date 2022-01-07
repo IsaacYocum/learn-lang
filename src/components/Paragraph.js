@@ -7,7 +7,7 @@ const Paragraph = ({ paragraph }) => {
     useEffect(() => {
         let regex = new RegExp(GS.sentenceRegex, "g")
         setSentences(sentences.concat(paragraph.match(regex)))
-    }, [])
+    }, [setSentences])
 
     return (
         <p>
