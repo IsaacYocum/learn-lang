@@ -6,7 +6,9 @@ const Paragraph = ({ paragraph }) => {
     const [sentences, setSentences] = useState([])
     useEffect(() => {
         let regex = new RegExp(GS.sentenceRegex, "g")
-        setSentences(sentences.concat(paragraph.match(regex)))
+        console.log('sentences', paragraph.match(/(.+?([A-Z].)\.(?:['")\\\s][\"]?)+?\s?)/igm))
+        let matches = paragraph.match(/(.+?([A-Z].)\.(?:['")\\\s]["]?)+?\s?)/igm);
+        setSentences(sentences.concat(matches))
     }, [setSentences])
 
     return (

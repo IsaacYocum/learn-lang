@@ -3,8 +3,8 @@
         "port": 3001
     },
     "language": "english",
-    "paragraphRegex": "[\r\n]+",
-    "sentenceRegex": "([^.!?]+[.!?]+)",
-    "wordRegex": "(?![a-zA-ZÀ-ÖØ-öø-ȳ]+)",
-    "newSentenceRegex": "\b((?!=|\\.|!|\\?).)+(.)"
+    "paragraphRegex": "[^\r\n]+",
+    "sentenceRegex": "\\b((?!=|\\.|!|\\?).)+(.)",
+    "englishWordRegex": "([a-zA-ZÀ-ÖØ-öø-ȳ]+)", 
+    "vietnameseWordRegex": "([a-zA-ZÀ-ÖØ-öø-ȳàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ]+ )"
 }

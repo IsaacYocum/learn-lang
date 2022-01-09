@@ -3,10 +3,12 @@ import Word from './Word'
 import GS from '../globalSettings.json'
 
 const Sentence = ({ sentence }) => {
+    console.log('sentence', sentence)
     const [words, setWords] = useState([])
     useEffect(() => {
-        let regex = new RegExp(GS.wordRegex, "g")
-        setWords(words.concat(sentence.split(regex)))
+        let regex = new RegExp(GS.englishWordRegex, "g")
+        console.log(sentence.match(regex))
+        setWords(words.concat(sentence.match(regex)))
     }, [setWords])
 
     return (

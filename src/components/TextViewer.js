@@ -14,7 +14,7 @@ const Text = ({ title, text }) => {
             .then(r => r.text())
             .then(text => {
                 let regex = new RegExp(GS.paragraphRegex, "g")
-                setParagraphs(paragraphs.concat(text.split(regex)))
+                setParagraphs(paragraphs.concat(text.match(regex)))
             })
     }, [text])
 

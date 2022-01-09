@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Router, Link, Switch, Route } from 'react-router-dom';
+import { Link, Switch, Route } from 'react-router-dom';
 import TextsViewer from './TextsViewer'
-import TextViewer from './TextViewer'
 
 
 const Home = () => {
