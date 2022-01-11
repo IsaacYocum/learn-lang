@@ -1,5 +1,5 @@
 .word {
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 
 /* https://www.w3schools.com/css/css_tooltip.asp */
@@ -45,4 +45,39 @@
 
 .hover-highlight:hover {
     background-color: yellow;
+}
+
+.familiarity-highlight-0 {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+}
+
+.familiarity-highlight-1 {
+    text-decoration: underline;
+    text-decoration-color: red;
+    text-decoration-thickness: 3px;
+}
+
+.familiarity-highlight-2 {
+    text-decoration: underline;
+    text-decoration-color: orange;
+    text-decoration-thickness: 3px;
+}
+
+.familiarity-highlight-3 {
+    text-decoration: underline;
+    text-decoration-color: yellow;
+    text-decoration-thickness: 3px;
+}
+
+.familiarity-highlight-4 {
+    text-decoration: underline;
+    text-decoration-color: green;
+    text-decoration-thickness: 3px;
+}
+
+.familiarity-highlight-5 {
+    text-decoration: underline;
+    text-decoration-color: blue;
+    text-decoration-thickness: 3px;
 }

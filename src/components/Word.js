@@ -1,10 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import WordDetails from './WordDetails'
 import './Word.css'
 
 const Word = ({ word, sentence }) => {
     const [isHovering, setIsHovering] = useState(false)
+    const [familiarity, setFamiliarity] = useState(-1)
     const space = '\xa0'
+
+    useEffect(() => {
+        if (/\w+/gi.test(word)) {
+            // if(word.toLowerCase() === 'boy' || word.toLowerCase() === 'mr') {
+            fetch(`http://localhost:3001/api/languages/english/words/${word.toLowerCase().trim()}`)
+                .then(resp => {
+                    if (resp.ok) {
+                        resp.json().then(json => setFamiliarity(1))
+                    } else {
+                        throw new Error(`No translation for ${word}`)
+                    }
+                })
+                .catch(() => {
+                    setFamiliarity(0) // catch 404, word is unkown
+                })
+        }
+    }, [])
+
 
     // If end of sentence
     if (word === '.' || word === '!' || word === '?') {
@@ -24,7 +43,7 @@ const Word = ({ word, sentence }) => {
     if (isHovering) {
         return (
             <span className='tooltip'>
-                <span className='word hover-highlight'
+                <span className={`word hover-highlight familiarity-highlight-${familiarity}`}
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}>
                     {word}
@@ -36,7 +55,7 @@ const Word = ({ word, sentence }) => {
 
     return (
         <span className='tooltip'>
-            <span className='word hover-highlight'
+            <span className={`word hover-highlight familiarity-highlight-${familiarity}`}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}>
                 {word}

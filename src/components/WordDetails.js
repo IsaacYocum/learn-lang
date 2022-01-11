@@ -7,13 +7,10 @@ const WordDetails = ({ word, sentence }) => {
         fetch(`http://localhost:3001/api/languages/english/words/${word.toLowerCase()}`)
             .then(resp => {
                 if (resp.ok) {
-                    return resp.json()
+                    resp.json().then(json => setWordDetails(json))
                 } else {
                     throw new Error(`No translation for ${word}`)
                 }
-            })
-            .then(wordJson => {
-                setWordDetails(wordJson)
             })
     }, [])
 
