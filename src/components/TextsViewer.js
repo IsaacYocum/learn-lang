@@ -3,17 +3,15 @@ import { Link, Switch, Route, useRouteMatch } from 'react-router-dom'
 import TextViewer from './TextViewer'
 
 const TextsViewer = () => {
-    // const navigate = useNavigate();
-    // navigate('/home')
-    console.log('in home')
-
     let [texts, setTexts] = useState([])
     let [textToShow, setTextToShow] = useState('')
 
+    const urlMatch = useRouteMatch('/texts/:text')
     useEffect(() => {
         fetch('http://localhost:3001/api/texts')
             .then(r => r.text())
             .then(textsJsonStr => {
+                console.log(textsJsonStr)
                 let textsJson = JSON.parse(textsJsonStr)
                 let arrayTexts = []
                 textsJson.texts.forEach(text => {
@@ -21,6 +19,8 @@ const TextsViewer = () => {
                 })
                 setTexts(texts.concat(arrayTexts))
             })
+
+        if (urlMatch) setTextToShow(urlMatch.params.text)
     }, [])
 
     return (

@@ -4,7 +4,7 @@ import './Word.css'
 const WordDetails = ({ word, sentence }) => {
     return (
         <span className="tooltiptext">
-            <p>{word}</p>
+            {word}
         </span>
     )
 }

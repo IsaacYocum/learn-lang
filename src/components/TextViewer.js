@@ -7,7 +7,7 @@ import Header from './Header'
 import Footer from './Footer'
 
 const Text = ({ title, text }) => {
-    console.log(text)
+    console.log('title', title, 'text', text)
     const [paragraphs, setParagraphs] = useState([])
     useEffect(() => {
         fetch(`http://localhost:3001/api/texts/${text}`)
