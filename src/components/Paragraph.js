@@ -6,15 +6,17 @@ const Paragraph = ({ paragraph }) => {
     const [sentences, setSentences] = useState([])
     useEffect(() => {
         let regex = new RegExp(GS.sentenceRegex, "g")
-        console.log('sentences', paragraph.match(/(.+?([A-Z].)\.(?:['")\\\s][\"]?)+?\s?)/igm))
-        let matches = paragraph.match(/(.+?([A-Z].)\.(?:['")\\\s]["]?)+?\s?)/igm);
+        // console.log('sentences', paragraph.split(/(?!Mrs.|Mr.)(?<=[.!?:;])/g))
+        let matches = paragraph.split(/(?<=[.!?:;])/g);
         setSentences(sentences.concat(matches))
     }, [setSentences])
 
     return (
         <p>
             {sentences.map((sentence, i) => {
-                return <Sentence key={i} sentence={sentence.trim()} />
+                if (sentence !== " ") {
+                    return <Sentence key={i} sentence={sentence.trim()} />
+                }
             })}
         </p>
     )
