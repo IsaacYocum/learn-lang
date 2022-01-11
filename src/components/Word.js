@@ -4,7 +4,6 @@ import './Word.css'
 
 const Word = ({ word, sentence }) => {
     const [isHovering, setIsHovering] = useState(false)
-    console.log(isHovering)
     const space = '\xa0'
 
     // If end of sentence
@@ -17,6 +16,7 @@ const Word = ({ word, sentence }) => {
         return <span>{word}</span>
     }
 
+    // If space
     if (word === ' ') {
         return <span>{space}</span>
     }
