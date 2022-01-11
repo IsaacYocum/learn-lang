@@ -5,9 +5,14 @@ const WordDetails = ({ word, sentence }) => {
     const [wordDetails, setWordDetails] = useState({})
     useEffect(() => {
         fetch(`http://localhost:3001/api/languages/english/words/${word.toLowerCase()}`)
-            .then(r => r.text())
-            .then(wordJsonStr => {
-                let wordJson = JSON.parse(wordJsonStr)
+            .then(resp => {
+                if (resp.ok) {
+                    return resp.json()
+                } else {
+                    throw new Error(`No translation for ${word}`)
+                }
+            })
+            .then(wordJson => {
                 setWordDetails(wordJson)
             })
     }, [])
