@@ -4,7 +4,7 @@ import './Word.css'
 const WordDetails = ({ word, sentence }) => {
     const [wordDetails, setWordDetails] = useState({})
     useEffect(() => {
-        fetch(`http://localhost:3001/api/languages/english/words/${word.toLowerCase()}`)
+        fetch(`/api/languages/english/words/${word.toLowerCase()}`)
             .then(resp => {
                 if (resp.ok) {
                     resp.json().then(json => setWordDetails(json))

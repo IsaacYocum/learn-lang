@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { Link, Switch, Route, useRouteMatch } from 'react-router-dom'
 import TextViewer from './TextViewer'
+import axios from 'axios'
 
 const TextsViewer = () => {
     let [texts, setTexts] = useState([])
     let [textToShow, setTextToShow] = useState('')
 
     const urlMatch = useRouteMatch('/texts/:text')
+
     useEffect(() => {
-        fetch('http://localhost:3001/api/texts')
-            .then(r => r.text())
-            .then(textsJsonStr => {
-                console.log(textsJsonStr)
-                let textsJson = JSON.parse(textsJsonStr)
-                let arrayTexts = []
-                textsJson.texts.forEach(text => {
-                    arrayTexts.push(text)
-                })
-                setTexts(texts.concat(arrayTexts))
+        axios.get('/api/texts')
+            .then(textsJson => {
+                console.log(textsJson)
+                setTexts(t => textsJson.data.texts)
             })
 
-        if (urlMatch) setTextToShow(urlMatch.params.text)
+            if (urlMatch) setTextToShow(urlMatch.params.text)
     }, [])
+
 
     return (
         <div>

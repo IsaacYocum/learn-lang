@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link, Switch, Route } from 'react-router-dom';
 import TextsViewer from './TextsViewer'
 

@@ -10,7 +10,7 @@ const Word = ({ word, sentence }) => {
     useEffect(() => {
         if (/\w+/gi.test(word)) {
             // if(word.toLowerCase() === 'boy' || word.toLowerCase() === 'mr') {
-            fetch(`http://localhost:3001/api/languages/english/words/${word.toLowerCase().trim()}`)
+            fetch(`/api/languages/english/words/${word.toLowerCase().trim()}`)
                 .then(resp => {
                     if (resp.ok) {
                         resp.json().then(json => setFamiliarity(1))
