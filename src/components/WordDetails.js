@@ -1,26 +1,34 @@
+import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import './Word.css'
 
 const WordDetails = ({ word, sentence }) => {
     const [wordDetails, setWordDetails] = useState({})
     useEffect(() => {
-        fetch(`/api/languages/english/words/${word.toLowerCase()}`)
+        axios.get(`/api/languages/english/words/${word.toLowerCase()}`)
             .then(resp => {
-                if (resp.ok) {
-                    resp.json().then(json => setWordDetails(json))
-                } else {
-                    throw new Error(`No translation for ${word}`)
+                console.log('wordDetails', resp)
+                if (resp.status === 200) {
+                    setWordDetails(resp.data)
                 }
             })
-    }, [])
+            .catch(() => {
+                let unknown = {
+                    "word": word,
+                    "familiarity": 0,
+                    "translation": "unknown"
+                }
+                setWordDetails(unknown)
+            })
+    }, [word])
 
     return (
         <span className="tooltiptext">
             {word}
             <br></br>
-            {wordDetails.language}
+            {wordDetails.translation}
             <br></br>
-            <a>Translate Sentence</a>
+            <a href="https://translate.google.com" target="_blank">Translate Sentence</a>
         </span>
     )
 }

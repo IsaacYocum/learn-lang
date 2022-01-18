@@ -1,7 +1,5 @@
 import React from 'react'
-import { Link, Switch, Route } from 'react-router-dom';
-import TextsViewer from './TextsViewer'
-
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -10,12 +8,6 @@ const Home = () => {
             <div>
                 <Link to="/texts">View Texts</Link>
             </div>
-
-            <Switch>
-                <Route path="/texts">
-                    <TextsViewer />
-                </Route>
-            </Switch>
         </div>
     )
 }

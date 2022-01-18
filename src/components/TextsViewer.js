@@ -1,39 +1,39 @@
 import React, { useState, useEffect } from 'react'
-import { Link, Switch, Route, useRouteMatch } from 'react-router-dom'
+import { Link, Switch, Route } from 'react-router-dom'
 import TextViewer from './TextViewer'
 import axios from 'axios'
 
 const TextsViewer = () => {
-    let [texts, setTexts] = useState([])
-    let [textToShow, setTextToShow] = useState('')
-
-    const urlMatch = useRouteMatch('/texts/:text')
+    const [texts, setTexts] = useState([])
+    const [textToShow, setTextToShow] = useState('')
 
     useEffect(() => {
         axios.get('/api/texts')
             .then(textsJson => {
-                console.log(textsJson)
-                setTexts(t => textsJson.data.texts)
+                setTexts(prev => prev.concat(textsJson.data.texts))
             })
-
-            if (urlMatch) setTextToShow(urlMatch.params.text)
     }, [])
-
 
     return (
         <div>
+            Available Texts
+            <nav>
+                <ul>
+                    {texts.map((title, i) => {
+                        return (
+                            <li key={i}>
+                                <Link to={`/texts/${title}`} onClick={() => setTextToShow(title)}>
+                                    {title}
+                                </Link>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </nav>
+
             <Switch>
-                <Route path="/texts/:text">
+                <Route exact path={`/text/:text`}>
                     <TextViewer title={textToShow} text={textToShow} />
-                </Route>
-                <Route path="/texts">
-                    Available Texts
-                    <ul>
-                        {texts.map((text, i) => {
-                            return <li key={i}><Link to={`/texts/${text}`} onClick={() => setTextToShow(text)}>{text}</Link></li>
-                            // return <li key={i}><a onClick={() => handleShowText(text)}>{text}</a></li>
-                        })}
-                    </ul>
                 </Route>
             </Switch>
         </div>

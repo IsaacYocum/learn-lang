@@ -14,11 +14,12 @@
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
-    background-color: black;
-    color: #fff;
+    background-color: lightgray;
+    color: black;
     text-align: left;
     border-radius: 6px;
     padding: 5px 0;
+    border: black;
 
     /* Position the tooltip */
     position: absolute;
@@ -48,8 +49,7 @@
 }
 
 .familiarity-highlight-0 {
-    text-decoration: underline;
-    text-decoration-thickness: 3px;
+    background-color: aquamarine;
 }
 
 .familiarity-highlight-1 {
