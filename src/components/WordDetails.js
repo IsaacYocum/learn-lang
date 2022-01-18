@@ -28,7 +28,7 @@ const WordDetails = ({ word, sentence }) => {
             <br></br>
             {wordDetails.translation}
             <br></br>
-            <a href="https://translate.google.com" target="_blank">Translate Sentence</a>
+            <a href="https://translate.google.com" target="_blank" rel="noopener noreferrer">Translate Sentence</a>
         </span>
     )
 }
