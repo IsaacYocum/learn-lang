@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Link, Switch, Route } from 'react-router-dom'
-import TextViewer from './TextViewer'
+import { useHistory } from "react-router-dom";
+import { Link } from 'react-router-dom'
+import './TextsViewer.css'
 import axios from 'axios'
 
 const TextsViewer = () => {
     const [texts, setTexts] = useState([])
-    const [textToShow, setTextToShow] = useState('')
+    const history = useHistory()
 
     useEffect(() => {
         axios.get('/api/texts')
@@ -13,6 +14,21 @@ const TextsViewer = () => {
                 setTexts(prev => prev.concat(textsJson.data.texts))
             })
     }, [])
+
+    const handleEditClick = (event) => {
+        console.log(event.target.value)
+
+    }
+
+    const handleDeleteClick = (event) => {
+        let textToDelete = event.target.value
+        axios.delete(`/api/deletetext/${textToDelete}`)
+            .then(resp => {
+                if (resp.status === 200) {
+                    history.go(0) // refreshes page
+                }
+            })
+    }
 
     return (
         <div>
@@ -22,20 +38,17 @@ const TextsViewer = () => {
                     {texts.map((title, i) => {
                         return (
                             <li key={i}>
-                                <Link to={`/texts/viewtext/${title}`} onClick={() => setTextToShow(title)}>
+                                <Link to={`/texts/viewtext/${title}`}>
                                     {title}
                                 </Link>
+
+                                <button value={title} onClick={handleEditClick}>Edit</button>
+                                <button value={title} onClick={handleDeleteClick}>Delete</button>
                             </li>
                         )
                     })}
                 </ul>
             </nav>
-
-            <Switch>
-                <Route exact path={`/text/:text`}>
-                    <TextViewer title={textToShow} text={textToShow} />
-                </Route>
-            </Switch>
         </div>
     )
 }

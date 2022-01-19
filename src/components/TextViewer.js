@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import './TextViewer.css'
 import Header from './Header'
 import Footer from './Footer'
 import axios from 'axios'
@@ -75,7 +74,6 @@ const TextViewer = ({ title }) => {
                     } else if (/\n+/g.test(any)) { // handle new lines
                         return (
                             <span key={i}>
-                                <br></br>
                                 <br></br>
                             </span>
                         )
