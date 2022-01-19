@@ -4,14 +4,17 @@ import Home from './components/Home.js'
 import { Switch, Route } from 'react-router-dom';
 import TextsViewer from './components/TextsViewer'
 import TextViewer from './components/TextViewer';
+import AddText from './components/AddText';
 
 function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/texts/:title"
-          render={props =>
-            <TextViewer title={props.match.params.title} />}>
+        <Route path="/texts/viewtext/:title" render={props =>
+          <TextViewer title={props.match.params.title} />}>
+        </Route>
+        <Route path="/texts/addtext">
+          <AddText />
         </Route>
         <Route path="/texts">
           <TextsViewer />

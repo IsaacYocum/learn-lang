@@ -16,13 +16,13 @@ const TextsViewer = () => {
 
     return (
         <div>
-            Available Texts
+            <h3>Available Texts</h3>
             <nav>
                 <ul>
                     {texts.map((title, i) => {
                         return (
                             <li key={i}>
-                                <Link to={`/texts/${title}`} onClick={() => setTextToShow(title)}>
+                                <Link to={`/texts/viewtext/${title}`} onClick={() => setTextToShow(title)}>
                                     {title}
                                 </Link>
                             </li>
