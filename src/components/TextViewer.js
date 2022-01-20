@@ -75,6 +75,7 @@ const TextViewer = ({ title }) => {
                         return (
                             <span key={i}>
                                 <br></br>
+                                <br></br>
                             </span>
                         )
                     } else { // handle any other characters such as punctuation

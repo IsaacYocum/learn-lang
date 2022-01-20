@@ -22,13 +22,13 @@ const AddText = () => {
             "title": title,
             "text": text
         }
-        
-        axios.post('/api/addtext', newText)
-        .then(resp => {
-            console.log('post sent ' + resp.status)
-        })
 
-        history.push('/texts/viewtexts')
+        axios.post('/api/addtext', newText)
+            .then(resp => {
+                if (resp.status === 201) {
+                    history.push('/texts/viewtexts')
+                }
+            })
     }
 
     return (

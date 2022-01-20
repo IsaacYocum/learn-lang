@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import TextsViewer from './components/TextsViewer'
 import TextViewer from './components/TextViewer';
 import AddText from './components/AddText';
+import About from './components/About';
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
         </Route>
         <Route path="/texts">
           <TextsViewer />
+        </Route>
+        <Route path="/about">
+          <About />
         </Route>
         <Route path="/">
           <Home />

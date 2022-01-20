@@ -15,9 +15,12 @@ const TextsViewer = () => {
             })
     }, [])
 
-    const handleEditClick = (event) => {
-        console.log(event.target.value)
+    const handleAddTextClick = () => {
+        history.push('/texts/addtext')
+    }
 
+    const handleEditClick = (event) => {
+        console.log('Edit ' + event.target.value)
     }
 
     const handleDeleteClick = (event) => {
@@ -33,6 +36,7 @@ const TextsViewer = () => {
     return (
         <div>
             <h3>Available Texts</h3>
+            <button onClick={handleAddTextClick}>Add Text</button>
             <nav>
                 <ul>
                     {texts.map((title, i) => {
@@ -42,8 +46,8 @@ const TextsViewer = () => {
                                     {title}
                                 </Link>
 
-                                <button value={title} onClick={handleEditClick}>Edit</button>
-                                <button value={title} onClick={handleDeleteClick}>Delete</button>
+                                <button className='hidden' value={title} onClick={handleEditClick}>Edit</button>
+                                <button className='hidden' value={title} onClick={handleDeleteClick}>Delete</button>
                             </li>
                         )
                     })}

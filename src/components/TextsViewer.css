@@ -2,7 +2,7 @@ li:hover {
     background-color: lightgray;
 }
 
-li:hover > button {
+li:hover > .hidden {
     display: inline;
 }
 
@@ -10,7 +10,7 @@ a {
     margin-right: 5px;
 }
 
-button {
+.hidden {
     margin-right: 5px;
     display: none;
     vertical-align: middle;
