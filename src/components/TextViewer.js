@@ -4,15 +4,17 @@ import Footer from './Footer'
 import axios from 'axios'
 import Word from './Word'
 
-const TextViewer = ({ title }) => {
+const TextViewer = ({ textId }) => {
+    const [text, setText] = useState({})
     const [isLoading, setIsLoading] = useState(true);
     const [anyCharacter, setAnyCharacter] = useState([])
     const [definedWords, setDefinedWords] = useState({});
 
     useEffect(() => {
-        axios.get(`/api/texts/${title}`)
+        axios.get(`/api/texts/${textId}`)
             .then(resp => {
-                let textData = resp.data
+                setText(resp.data[0])
+                let textData = resp.data[0].text
                 console.log('text', typeof textData)
                 let any = textData.match(/(\w+| |[.,;:!?’'"()\n]*)/gi)
                 console.log(any)
@@ -39,7 +41,7 @@ const TextViewer = ({ title }) => {
                         setIsLoading(false)
                     })
             })
-    }, [title])
+    }, [textId])
 
     if (isLoading) {
         return <p>loading...</p>
@@ -47,10 +49,9 @@ const TextViewer = ({ title }) => {
 
     return (
         <div>
-            <Header />
+            <Header title={text.title} text={text}/>
 
             <div className='textBody'>
-                <p>{title}</p>
                 {console.log('anyCharacter', anyCharacter)}
                 {console.log('definedWords', definedWords)}
                 {anyCharacter.map((any, i) => {

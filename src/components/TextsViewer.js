@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom'
+import Header from './Header';
+import Footer from './Footer';
 import './TextsViewer.css'
 import axios from 'axios'
 
@@ -11,7 +13,7 @@ const TextsViewer = () => {
     useEffect(() => {
         axios.get('/api/texts')
             .then(textsJson => {
-                setTexts(prev => prev.concat(textsJson.data.texts))
+                setTexts(textsJson.data)
             })
     }, [])
 
@@ -20,7 +22,7 @@ const TextsViewer = () => {
     }
 
     const handleEditClick = (event) => {
-        console.log('Edit ' + event.target.value)
+        history.push(`/texts/edittext/${event.target.value}`)
     }
 
     const handleDeleteClick = (event) => {
@@ -35,24 +37,27 @@ const TextsViewer = () => {
 
     return (
         <div>
-            <h3>Available Texts</h3>
+            <Header title={"Available Texts"} />
+
             <button onClick={handleAddTextClick}>Add Text</button>
             <nav>
                 <ul>
-                    {texts.map((title, i) => {
+                    {texts.map((text, i) => {
                         return (
                             <li key={i}>
-                                <Link to={`/texts/viewtext/${title}`}>
-                                    {title}
+                                <Link to={`/texts/viewtext/${text.textId}`}>
+                                    {text.title}
                                 </Link>
 
-                                <button className='hidden' value={title} onClick={handleEditClick}>Edit</button>
-                                <button className='hidden' value={title} onClick={handleDeleteClick}>Delete</button>
+                                <button className='hidden' value={text.textId} onClick={handleEditClick}>Edit</button>
+                                <button className='hidden' value={text.textId} onClick={handleDeleteClick}>Delete</button>
                             </li>
                         )
                     })}
                 </ul>
             </nav>
+
+            <Footer />
         </div>
     )
 }
