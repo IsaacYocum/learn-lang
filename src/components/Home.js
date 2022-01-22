@@ -15,6 +15,8 @@ const Home = ({ setHeaderState }) => {
                 <br></br>
                 <Link to="/texts/addtext">Add Text</Link>
                 <br></br>
+                <Link to="/languages">View Languages</Link>
+                <br></br>
                 <Link to="/about">About</Link>
             </nav>
         </div>

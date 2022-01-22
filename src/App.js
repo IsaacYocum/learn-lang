@@ -1,8 +1,9 @@
 // import logo from './logo.svg';
-import React, { createContext, useState, useContext, useMemo } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Home from './components/Home.js'
 import { Switch, Route } from 'react-router-dom';
+import LanguagesViewer from './components/LanguagesViewer'
 import TextsViewer from './components/TextsViewer'
 import TextViewer from './components/TextViewer';
 import AddText from './components/AddText';
@@ -34,6 +35,9 @@ const App = () => {
         </Route>
         <Route path="/texts">
           <TextsViewer setHeaderState={setHeaderState} />
+        </Route>
+        <Route path="/languages">
+          <LanguagesViewer setHeaderState={setHeaderState} />
         </Route>
         <Route path="/about">
           <About setHeaderState={setHeaderState} />
