@@ -11,6 +11,7 @@ import About from './components/About';
 import EditText from './components/EditText';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import LanguageViewer from './components/LanguageViewer';
 
 const App = () => {
   const [headerState, setHeaderState] = useState({
@@ -35,6 +36,9 @@ const App = () => {
         </Route>
         <Route path="/texts">
           <TextsViewer setHeaderState={setHeaderState} />
+        </Route>
+        <Route path="/languages/:language/" render={props =>
+          <LanguageViewer language={props.match.params.language} setHeaderState={setHeaderState} />}>
         </Route>
         <Route path="/languages">
           <LanguagesViewer setHeaderState={setHeaderState} />

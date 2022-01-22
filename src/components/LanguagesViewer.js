@@ -14,7 +14,7 @@ const LanguagesViewer = ({ setHeaderState }) => {
             .then(languagesJson => {
                 setLanguages(languagesJson.data)
             })
-    }, [])
+    }, [setHeaderState])
 
     return (
         <div>
@@ -22,7 +22,7 @@ const LanguagesViewer = ({ setHeaderState }) => {
                 {languages.map((language, i) => {
                     return (
                         <li key={i}>
-                            <Link to={`/languages/viewlanguage/${language.language}`}>
+                            <Link to={`/languages/${language.language}`}>
                                 {language.language}
                             </Link>
                         </li>

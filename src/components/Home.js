@@ -6,7 +6,7 @@ const Home = ({ setHeaderState }) => {
         setHeaderState({
             "title": "Home"
         })
-    }, [])
+    }, [setHeaderState])
 
     return (
         <div>
