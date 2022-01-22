@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import Header from './Header';
-import Footer from './Footer';
 
-const Home = () => {
+const Home = ({ setHeaderState }) => {
+    useEffect(() => {
+        setHeaderState({
+            "title": "Home"
+        })
+    }, [])
+
     return (
         <div>
-            <Header title={"Home"} />
-
             <nav>
                 <Link to="/texts/viewtext">View Texts</Link>
                 <br></br>
@@ -15,8 +17,6 @@ const Home = () => {
                 <br></br>
                 <Link to="/about">About</Link>
             </nav>
-
-            <Footer />
         </div>
     )
 }

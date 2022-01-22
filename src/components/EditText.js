@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
 
-const EditText = ({ textId }) => {
+const EditText = ({ textId, setHeaderState }) => {
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
     const history = useHistory()
 
     useEffect(() => {
+        setHeaderState({
+            "title": "Edit text"
+        })
+
         axios.get(`/api/texts/${textId}`)
             .then(resp => {
                 console.log(resp)

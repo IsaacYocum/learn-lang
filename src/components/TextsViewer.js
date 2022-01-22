@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom'
-import Header from './Header';
-import Footer from './Footer';
 import './TextsViewer.css'
 import axios from 'axios'
 
-const TextsViewer = () => {
+const TextsViewer = ({ setHeaderState }) => {
     const [texts, setTexts] = useState([])
     const history = useHistory()
 
     useEffect(() => {
+        setHeaderState({
+            "title": 'Available Texts'
+        })
+
         axios.get('/api/texts')
             .then(textsJson => {
                 setTexts(textsJson.data)
@@ -37,8 +39,6 @@ const TextsViewer = () => {
 
     return (
         <div>
-            <Header title={"Available Texts"} />
-
             <button onClick={handleAddTextClick}>Add Text</button>
             <nav>
                 <ul>
@@ -56,8 +56,6 @@ const TextsViewer = () => {
                     })}
                 </ul>
             </nav>
-
-            <Footer />
         </div>
     )
 }

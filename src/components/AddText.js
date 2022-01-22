@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
 
-const AddText = () => {
+const AddText = ({setHeaderState}) => {
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
     const history = useHistory()
+
+    useEffect(() => {
+        setHeaderState({
+            "title": "Add text"
+        })
+    }, [])
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value)
@@ -33,7 +39,6 @@ const AddText = () => {
 
     return (
         <div>
-            <h3>Add a text</h3>
             <form onSubmit={handleSubmit}>
                 <label>
                     Title:

@@ -1,7 +1,8 @@
-import React from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { useHistory, matchPath } from 'react-router-dom'
 
-const Header = ({title, text}) => {
+const Header = ({ headerState }) => {
+    console.log(headerState)
     const history = useHistory()
 
     const onHomeClick = () => {
@@ -13,13 +14,13 @@ const Header = ({title, text}) => {
     }
 
     const onEditClick = () => {
-        history.push(`/texts/edittext/${text.textId}`)
+        history.push(`/texts/edittext/${headerState.text.textId}`)
     }
 
-    if (text) {
+    if (headerState.text) {
         return (
             <div>
-                {title}
+                {headerState.title}
                 <br></br>
                 <button onClick={onHomeClick}>Home</button>
                 &nbsp;
@@ -33,7 +34,7 @@ const Header = ({title, text}) => {
 
     return (
         <div>
-            {title}
+            {headerState.title}
             <br></br>
             <button onClick={onHomeClick}>Home</button>
             &nbsp;

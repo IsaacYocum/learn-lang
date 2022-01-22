@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import { createContext, useState, useContext, useMemo } from 'react';
+import React, { createContext, useState, useContext, useMemo } from 'react';
 import './App.css';
 import Home from './components/Home.js'
 import { Switch, Route } from 'react-router-dom';
@@ -9,37 +9,41 @@ import AddText from './components/AddText';
 import About from './components/About';
 import EditText from './components/EditText';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
-function App() {
-  const HeaderContext = createContext({
-    title: '',
-    buttons: [],
-    setHeaderContext: () => {},
+const App = () => {
+  const [headerState, setHeaderState] = useState({
+    "title": '',
+    "text": null,
+    "buttons": []
   });
 
   return (
     <div className="App">
-      {/* <Header /> */}
+      <Header headerState={headerState} />
+
       <Switch>
         <Route path="/texts/viewtext/:textId" render={props =>
-          <TextViewer textId={props.match.params.textId} />}>
+          <TextViewer textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
         </Route>
         <Route path="/texts/edittext/:textId" render={props =>
-          <EditText textId={props.match.params.textId} />}>
+          <EditText textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
         </Route>
         <Route path="/texts/addtext">
-          <AddText />
+          <AddText setHeaderState={setHeaderState} />
         </Route>
         <Route path="/texts">
-          <TextsViewer />
+          <TextsViewer setHeaderState={setHeaderState} />
         </Route>
         <Route path="/about">
-          <About />
+          <About setHeaderState={setHeaderState} />
         </Route>
         <Route path="/">
-          <Home />
+          <Home setHeaderState={setHeaderState} />
         </Route>
       </Switch>
+
+      <Footer />
     </div>
   );
 }

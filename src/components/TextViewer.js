@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import Header from './Header'
-import Footer from './Footer'
 import axios from 'axios'
 import Word from './Word'
 
-const TextViewer = ({ textId }) => {
+const TextViewer = ({ textId, setHeaderState }) => {
     const [text, setText] = useState({})
     const [isLoading, setIsLoading] = useState(true);
     const [anyCharacter, setAnyCharacter] = useState([])
@@ -13,6 +11,11 @@ const TextViewer = ({ textId }) => {
     useEffect(() => {
         axios.get(`/api/texts/${textId}`)
             .then(resp => {
+                setHeaderState({
+                    "title": resp.data[0].title,
+                    "text": resp.data[0]
+                })
+
                 setText(resp.data[0])
                 let textData = resp.data[0].text
                 console.log('text', typeof textData)
@@ -49,8 +52,6 @@ const TextViewer = ({ textId }) => {
 
     return (
         <div>
-            <Header title={text.title} text={text}/>
-
             <div className='textBody'>
                 {console.log('anyCharacter', anyCharacter)}
                 {console.log('definedWords', definedWords)}
@@ -84,8 +85,6 @@ const TextViewer = ({ textId }) => {
                     }
                 })}
             </div>
-
-            <Footer />
         </div>
     )
 }

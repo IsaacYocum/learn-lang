@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const About = () => {
+const About = ({ setHeaderState }) => {
+    useEffect(() => {
+        setHeaderState({
+            "title": 'About'
+        })
+    }, [])
+
     return (
         <div>
-            <h3>About</h3>
             <p>
                 Hi! My name is Isaac and I am learning React. This is an app I created to help me learn!
             </p>
