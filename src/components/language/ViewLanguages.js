@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-const LanguagesViewer = ({ setHeaderState }) => {
+const ViewLanguage = ({ setHeaderState }) => {
     const [languages, setLanguages] = useState([])
 
     useEffect(() => {
@@ -33,4 +33,4 @@ const LanguagesViewer = ({ setHeaderState }) => {
     )
 }
 
-export default LanguagesViewer
+export default ViewLanguage

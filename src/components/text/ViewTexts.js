@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom'
-import './TextsViewer.css'
+import './ViewTexts.css'
 import axios from 'axios'
 
-const TextsViewer = ({ setHeaderState }) => {
+const ViewTexts = ({ setHeaderState }) => {
     const [texts, setTexts] = useState([])
     const history = useHistory()
 
@@ -60,4 +60,4 @@ const TextsViewer = ({ setHeaderState }) => {
     )
 }
 
-export default TextsViewer
+export default ViewTexts

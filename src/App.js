@@ -1,17 +1,17 @@
-// import logo from './logo.svg';
 import React, { useState } from 'react';
 import './App.css';
 import Home from './components/Home.js'
 import { Switch, Route } from 'react-router-dom';
-import LanguagesViewer from './components/LanguagesViewer'
-import TextsViewer from './components/TextsViewer'
-import TextViewer from './components/TextViewer';
-import AddText from './components/AddText';
+import ViewTexts from './components/text/ViewTexts'
+import ViewText from './components/text/ViewText';
+import AddText from './components/text/AddText';
+import EditText from './components/text/EditText';
 import About from './components/About';
-import EditText from './components/EditText';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import LanguageViewer from './components/LanguageViewer';
+import ViewLanguage from './components/language/ViewLanguage';
+import ViewLanguages from './components/language/ViewLanguages'
+
 
 const App = () => {
   const [headerState, setHeaderState] = useState({
@@ -26,7 +26,7 @@ const App = () => {
 
       <Switch>
         <Route path="/texts/viewtext/:textId" render={props =>
-          <TextViewer textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
+          <ViewText textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
         </Route>
         <Route path="/texts/edittext/:textId" render={props =>
           <EditText textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
@@ -35,13 +35,13 @@ const App = () => {
           <AddText setHeaderState={setHeaderState} />
         </Route>
         <Route path="/texts">
-          <TextsViewer setHeaderState={setHeaderState} />
+          <ViewTexts setHeaderState={setHeaderState} />
         </Route>
         <Route path="/languages/:language/" render={props =>
-          <LanguageViewer language={props.match.params.language} setHeaderState={setHeaderState} />}>
+          <ViewLanguage language={props.match.params.language} setHeaderState={setHeaderState} />}>
         </Route>
         <Route path="/languages">
-          <LanguagesViewer setHeaderState={setHeaderState} />
+          <ViewLanguages setHeaderState={setHeaderState} />
         </Route>
         <Route path="/about">
           <About setHeaderState={setHeaderState} />

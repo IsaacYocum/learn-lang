@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Word from './Word'
+import Word from '../Word'
 
-const TextViewer = ({ textId, setHeaderState }) => {
+const ViewText = ({ textId, setHeaderState }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [anyCharacter, setAnyCharacter] = useState([])
     const [definedWords, setDefinedWords] = useState({});
@@ -87,4 +87,4 @@ const TextViewer = ({ textId, setHeaderState }) => {
     )
 }
 
-export default TextViewer
+export default ViewText

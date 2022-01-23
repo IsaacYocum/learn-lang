@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const LanguageViewer = ({ language, setHeaderState }) => {
+const ViewLanguage = ({ language, setHeaderState }) => {
     const [words, setWords] = useState([])
 
     useEffect(() => {
@@ -30,4 +30,4 @@ const LanguageViewer = ({ language, setHeaderState }) => {
     )
 }
 
-export default LanguageViewer
+export default ViewLanguage
