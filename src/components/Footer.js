@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <div className='footer'>
             <hr></hr>
-            Build with React, Express, SQLite3, and Node
+            Build with React, Express, SQLite3, Node, and Cypress
             <br></br>
             <div className='row'>
                 <div className='column'>
