@@ -3,7 +3,6 @@ import axios from 'axios'
 import Word from './Word'
 
 const TextViewer = ({ textId, setHeaderState }) => {
-    const [text, setText] = useState({})
     const [isLoading, setIsLoading] = useState(true);
     const [anyCharacter, setAnyCharacter] = useState([])
     const [definedWords, setDefinedWords] = useState({});
@@ -16,7 +15,6 @@ const TextViewer = ({ textId, setHeaderState }) => {
                     "text": resp.data[0]
                 })
 
-                setText(resp.data[0])
                 let textData = resp.data[0].text
                 console.log('text', typeof textData)
                 let any = textData.match(/(\w+| |[.,;:!?’'"()\n]*)/gi)
@@ -44,7 +42,7 @@ const TextViewer = ({ textId, setHeaderState }) => {
                         setIsLoading(false)
                     })
             })
-    }, [textId])
+    }, [textId, setHeaderState])
 
     if (isLoading) {
         return <p>loading...</p>

@@ -18,7 +18,7 @@ const EditText = ({ textId, setHeaderState }) => {
                 setTitle(resp.data[0].title)
                 setText(resp.data[0].text)
             })
-    }, [textId])
+    }, [textId, setHeaderState])
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value)

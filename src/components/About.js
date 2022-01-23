@@ -5,7 +5,7 @@ const About = ({ setHeaderState }) => {
         setHeaderState({
             "title": 'About'
         })
-    }, [])
+    }, [setHeaderState])
 
     return (
         <div>

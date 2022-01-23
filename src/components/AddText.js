@@ -11,7 +11,7 @@ const AddText = ({setHeaderState}) => {
         setHeaderState({
             "title": "Add text"
         })
-    }, [])
+    }, [setHeaderState])
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value)

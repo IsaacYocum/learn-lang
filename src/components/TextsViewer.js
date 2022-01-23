@@ -17,7 +17,7 @@ const TextsViewer = ({ setHeaderState }) => {
             .then(textsJson => {
                 setTexts(textsJson.data)
             })
-    }, [])
+    }, [setHeaderState])
 
     const handleAddTextClick = () => {
         history.push('/texts/addtext')

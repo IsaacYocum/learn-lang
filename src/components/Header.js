@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { useHistory, matchPath } from 'react-router-dom'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 const Header = ({ headerState }) => {
     console.log(headerState)
