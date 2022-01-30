@@ -11,11 +11,11 @@ const ViewText = ({ textId, setHeaderState }) => {
         axios.get(`/api/texts/${textId}`)
             .then(resp => {
                 setHeaderState({
-                    "title": resp.data[0].title,
-                    "text": resp.data[0]
+                    "title": resp.data.title,
+                    "text": resp.data
                 })
 
-                let textData = resp.data[0].text
+                let textData = resp.data.text
                 console.log('text', typeof textData)
                 let any = textData.match(/(\w+| |[.,;:!?’'"()\n]*)/gi)
                 console.log(any)

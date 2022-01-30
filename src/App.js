@@ -25,14 +25,14 @@ const App = () => {
       <Header headerState={headerState} />
 
       <Switch>
-        <Route path="/texts/viewtext/:textId" render={props =>
-          <ViewText textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
-        </Route>
         <Route path="/texts/edittext/:textId" render={props =>
           <EditText textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
         </Route>
         <Route path="/texts/addtext">
           <AddText setHeaderState={setHeaderState} />
+        </Route>
+        <Route path="/texts/:textId" render={props =>
+          <ViewText textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
         </Route>
         <Route path="/texts">
           <ViewTexts setHeaderState={setHeaderState} />

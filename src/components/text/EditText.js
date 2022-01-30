@@ -15,8 +15,8 @@ const EditText = ({ textId, setHeaderState }) => {
         axios.get(`/api/texts/${textId}`)
             .then(resp => {
                 console.log(resp)
-                setTitle(resp.data[0].title)
-                setText(resp.data[0].text)
+                setTitle(resp.data.title)
+                setText(resp.data.text)
             })
     }, [textId, setHeaderState])
 
@@ -36,16 +36,16 @@ const EditText = ({ textId, setHeaderState }) => {
             "textId": parseInt(textId),
             "title": title,
             "text": text,
-            "language": 'english'
+            "language": text.language
         }
 
-        axios.put(`/api/edittext/${textId}`, editedText)
+        axios.put(`/api/texts/${textId}`, editedText)
             .then(resp => {
                 if (resp.status === 200) {
                     if (submitButtonId === 'save') {
-                        history.push('/texts/viewtexts')
+                        history.push('/texts')
                     } else {
-                    history.push(`/texts/viewtext/${textId}`)
+                    history.push(`/texts/${textId}`)
                     }
                 }
             })

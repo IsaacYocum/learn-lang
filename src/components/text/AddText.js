@@ -2,19 +2,32 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
 
-const AddText = ({setHeaderState}) => {
+const AddText = ({ setHeaderState }) => {
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
+    const [language, setLanguage] = useState('')
+    const [languages, setLanguages] = useState([])
     const history = useHistory()
 
     useEffect(() => {
         setHeaderState({
             "title": "Add text"
         })
+
+        axios.get('/api/languages')
+            .then(languagesJson => {
+                setLanguage(languagesJson.data[0].language)
+                setLanguages(languagesJson.data)
+            })
+
     }, [setHeaderState])
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value)
+    }
+
+    const handleLanguageChange = (event) => {
+        setLanguage(event.target.value)
     }
 
     const handleTextChange = (event) => {
@@ -26,13 +39,14 @@ const AddText = ({setHeaderState}) => {
 
         let newText = {
             "title": title,
-            "text": text
+            "text": text,
+            "language": language
         }
 
         axios.post('/api/addtext', newText)
             .then(resp => {
                 if (resp.status === 201) {
-                    history.push('/texts/viewtexts')
+                    history.push('/texts')
                 }
             })
     }
@@ -40,6 +54,16 @@ const AddText = ({setHeaderState}) => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                <label>Select language: </label>
+                <select value={language} onChange={handleLanguageChange}>
+                    {languages.map((language, i) => {
+                        return (
+                            <option key={i} value={language.language.toLowerCase()}>{language.language}</option>
+                        )
+                    })}
+                </select>
+                <br></br>
+                <br></br>
                 <label>
                     Title:
                     <br></br>

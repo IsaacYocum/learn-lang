@@ -11,7 +11,7 @@ const Home = ({ setHeaderState }) => {
     return (
         <div>
             <nav>
-                <Link to="/texts/viewtext">View Texts</Link>
+                <Link to="/texts">View Texts</Link>
                 <br></br>
                 <Link to="/texts/addtext">Add Text</Link>
                 <br></br>

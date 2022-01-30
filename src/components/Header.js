@@ -10,7 +10,7 @@ const Header = ({ headerState }) => {
     }
 
     const onViewTextsClick = () => {
-        history.push(`/texts/viewtexts`)
+        history.push(`/texts`)
     }
 
     const onEditClick = () => {
