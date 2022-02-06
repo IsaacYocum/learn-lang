@@ -5,7 +5,7 @@ const ViewTextEditor = ({ wordToEdit, knownWords, setKnownWords }) => {
     console.log('wordToEdit', wordToEdit)
     const [word, setWord] = useState({})
     const [editedTranslation, setEditedTranslation] = useState('')
-    const [editedFamiliarity, setEditedFamiliarity] = useState('')
+    const [editedFamiliarity, setEditedFamiliarity] = useState(0)
 
     const [notification, setNotification] = useState('')
 
@@ -20,7 +20,7 @@ const ViewTextEditor = ({ wordToEdit, knownWords, setKnownWords }) => {
     }
 
     const handleFamiliarityChange = (e) => {
-        setEditedFamiliarity(e.target.value)
+        setEditedFamiliarity(parseInt(e.target.value))
     }
 
     const handleSubmit = (e) => {
@@ -74,13 +74,50 @@ const ViewTextEditor = ({ wordToEdit, knownWords, setKnownWords }) => {
                     <br></br>
                     <label>Translation:</label>
                     <br></br>
-                    {/* <input type="textArea" value={wordToEdit.translation} /> */}
                     <textarea value={editedTranslation} onChange={handleTranslationChange} rows='5' cols='50'></textarea>
                     <br></br>
                     <br></br>
                     <label>Familiarity:</label>
+                    {/* <br></br> */}
+                    {/* <input type="text" value={editedFamiliarity} onChange={handleFamiliarityChange} /> */}
                     <br></br>
-                    <input type="text" value={editedFamiliarity} onChange={handleFamiliarityChange} />
+                    <div>
+                        <label>
+                            [
+                            <input type="radio" value="0" checked={editedFamiliarity === 0} onChange={handleFamiliarityChange}/>
+                            unknown]
+                        </label>
+                        &nbsp;
+                        <label>
+                            [
+                            <input type="radio" value="1" checked={editedFamiliarity === 1} onChange={handleFamiliarityChange}/>
+                            1]
+                        </label>
+                        &nbsp;
+                        <label>
+                            [
+                            <input type="radio" value="2" checked={editedFamiliarity === 2} onChange={handleFamiliarityChange}/>
+                            2]
+                        </label>
+                        &nbsp;
+                        <label>
+                            [
+                            <input type="radio" value="3" checked={editedFamiliarity === 3} onChange={handleFamiliarityChange}/>
+                            3]
+                        </label>
+                        &nbsp;
+                        <label>
+                            [
+                            <input type="radio" value="4" checked={editedFamiliarity === 4} onChange={handleFamiliarityChange}/>
+                            4]
+                        </label>
+                        &nbsp;
+                        <label>
+                            [
+                            <input type="radio" value="5" checked={editedFamiliarity === 5} onChange={handleFamiliarityChange}/>
+                            5]
+                        </label>
+                    </div>
                     <br></br>
                     <input type="submit" value="Submit"></input>
                 </form>

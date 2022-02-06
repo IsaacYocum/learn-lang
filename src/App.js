@@ -24,32 +24,34 @@ const App = () => {
     <div className="App">
       <Header headerState={headerState} />
 
-      <Switch>
-        <Route path="/texts/edittext/:textId" render={props =>
-          <EditText textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
-        </Route>
-        <Route path="/texts/addtext">
-          <AddText setHeaderState={setHeaderState} />
-        </Route>
-        <Route path="/texts/:textId" render={props =>
-          <ViewText textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
-        </Route>
-        <Route path="/texts">
-          <ViewTexts setHeaderState={setHeaderState} />
-        </Route>
-        <Route path="/languages/:language/" render={props =>
-          <ViewLanguage language={props.match.params.language} setHeaderState={setHeaderState} />}>
-        </Route>
-        <Route path="/languages">
-          <ViewLanguages setHeaderState={setHeaderState} />
-        </Route>
-        <Route path="/about">
-          <About setHeaderState={setHeaderState} />
-        </Route>
-        <Route path="/">
-          <Home setHeaderState={setHeaderState} />
-        </Route>
-      </Switch>
+      <div className="body">
+        <Switch>
+          <Route path="/texts/edittext/:textId" render={props =>
+            <EditText textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
+          </Route>
+          <Route path="/texts/addtext">
+            <AddText setHeaderState={setHeaderState} />
+          </Route>
+          <Route path="/texts/:textId" render={props =>
+            <ViewText textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
+          </Route>
+          <Route path="/texts">
+            <ViewTexts setHeaderState={setHeaderState} />
+          </Route>
+          <Route path="/languages/:language/" render={props =>
+            <ViewLanguage language={props.match.params.language} setHeaderState={setHeaderState} />}>
+          </Route>
+          <Route path="/languages">
+            <ViewLanguages setHeaderState={setHeaderState} />
+          </Route>
+          <Route path="/about">
+            <About setHeaderState={setHeaderState} />
+          </Route>
+          <Route path="/">
+            <Home setHeaderState={setHeaderState} />
+          </Route>
+        </Switch>
+      </div>
 
       <Footer />
     </div>

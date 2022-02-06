@@ -19,7 +19,7 @@ const Header = ({ headerState }) => {
 
     if (headerState.text) {
         return (
-            <div>
+            <div className="header">
                 {headerState.title}
                 <br></br>
                 <button onClick={onHomeClick}>Home</button>
@@ -33,7 +33,7 @@ const Header = ({ headerState }) => {
     }
 
     return (
-        <div>
+        <div className="header">
             {headerState.title}
             <br></br>
             <button onClick={onHomeClick}>Home</button>

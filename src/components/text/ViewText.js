@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import '../../App.css'
 import './ViewText.css'
 import Word from '../Word'
 import Split from 'react-split'
@@ -9,7 +10,6 @@ const ViewText = ({ textId, setHeaderState }) => {
     const [text, setText] = useState({})
     const [isLoading, setIsLoading] = useState(true);
     const [anyCharacter, setAnyCharacter] = useState([])
-    const [unknownWords, setUnknownWords] = useState({})
     const [knownWords, setKnownWords] = useState({});
     const [wordToEdit, setWordToEdit] = useState({})
 
@@ -57,50 +57,54 @@ const ViewText = ({ textId, setHeaderState }) => {
     }
 
     return (
-        <Split style={{ display: `flex`, height: `calc(100vh - 10rem)` }}>
-            <div id="textPane" className='textPane'>
-                {console.log('anyCharacter', anyCharacter)}
-                {console.log('definedWords', knownWords)}
-                {anyCharacter.map((any, i) => {
-                    if (/\w+/gi.test(any)) { // handle words
-                        let knownWord = knownWords[any.toLowerCase()]
-                        if (knownWord) {
-                            let knownWordObj = {
-                                "word": any,
-                                "familiarity": knownWord.familiarity,
-                                "translation": knownWord.translation,
-                                "language": text.language
+        <div className="body">
+            <Split style={{ display: `flex`, height: `calc(100vh - 10rem)` }}>
+                <div id="textPane" className='textPane'>
+                    {console.log('anyCharacter', anyCharacter)}
+                    {console.log('definedWords', knownWords)}
+                    {anyCharacter.map((any, i) => {
+                        if (/\w+/gi.test(any)) { // handle words
+                            let knownWord = knownWords[any.toLowerCase()]
+                            if (knownWord) {
+                                let knownWordObj = {
+                                    "word": any,
+                                    "familiarity": knownWord.familiarity,
+                                    "translation": knownWord.translation,
+                                    "language": text.language
+                                }
+                                return <Word key={i} wordObj={knownWordObj} setWordToEdit={setWordToEdit} />
+                            } else {
+                                let unknownWordObj = {
+                                    "word": any,
+                                    "familiarity": 0,
+                                    "translation": "unknown",
+                                    "language": text.language
+                                }
+                                return <Word key={i} wordObj={unknownWordObj} setWordToEdit={setWordToEdit} />
                             }
-                            return <Word key={i} wordObj={knownWordObj} setWordToEdit={setWordToEdit}/>
-                        } else {
-                            let unknownWordObj = {
-                                "word": any,
-                                "familiarity": 0,
-                                "translation": "unknown",
-                                "language": text.language
-                            }
-                            return <Word key={i} wordObj={unknownWordObj} setWordToEdit={setWordToEdit}/>
+                        } else if (/\n+/g.test(any)) { // handle new lines
+                            return (
+                                <span key={i}>
+                                    <br></br>
+                                    <br></br>
+                                </span>
+                            )
+                        } else { // handle any other characters such as punctuation
+                            return <span key={i}>{any}</span>
                         }
-                    } else if (/\n+/g.test(any)) { // handle new lines
-                        return (
-                            <span key={i}>
-                                <br></br>
-                                <br></br>
-                            </span>
-                        )
-                    } else { // handle any other characters such as punctuation
-                        return <span key={i}>{any}</span>
-                    }
-                })}
+                    })}
 
-            </div>
-            <Split direction="vertical" style={{ width: '50vw' }}>
-                <div id="notificationPane" className='notificationPane'>
-                    <ViewTextEditor wordToEdit={wordToEdit} knownWords={knownWords} setKnownWords={setKnownWords}/>
                 </div>
-                <div id="dictionaryPane" className='dictionaryPane'></div>
+                <Split direction="vertical" style={{ width: '50vw' }}>
+                    <div id="notificationPane" className='notificationPane'>
+                        <ViewTextEditor wordToEdit={wordToEdit} knownWords={knownWords} setKnownWords={setKnownWords} />
+                    </div>
+                    <div id="dictionaryPane" className='dictionaryPane'>
+                        
+                    </div>
+                </Split>
             </Split>
-        </Split>
+        </div>
     )
 }
 

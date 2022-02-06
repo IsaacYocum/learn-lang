@@ -24,7 +24,7 @@
 
     /* Position the tooltip */
     position: absolute;
-    z-index: 1;
+    z-index: 1010;
     bottom: 100%;
     left: 50%;
     margin-left: -35px;
@@ -51,11 +51,6 @@
 
 .familiarity-highlight-0 {
     background-color: aquamarine;
-    background-size: contain;
-}
-
-.familiarity-highlight-0, .hover-highlight:hover {
-    /* background-size: 100% 80% */
 }
 
 .familiarity-highlight-1 {
