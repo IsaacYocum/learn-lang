@@ -29,7 +29,7 @@ const ViewTextEditor = ({ wordToEdit, knownWords, setKnownWords }) => {
         editedWord.translation = editedTranslation
         editedWord.familiarity = editedFamiliarity
         console.log('submit', editedWord)
-        
+
         // Update known word
         if (knownWords[word.word]) {
             axios.put(`/api/languages/${word.language}/words/${word.word}`, { editedWord })
@@ -37,7 +37,7 @@ const ViewTextEditor = ({ wordToEdit, knownWords, setKnownWords }) => {
                     if (resp.status === 200) {
                         setNotification(`Term "${word.word}" was successfully updated.`)
                         let knownWordsCopy = JSON.parse(JSON.stringify(knownWords))
-                        knownWordsCopy[word.word] = editedWord
+                        knownWordsCopy[word.word.toLowerCase()] = editedWord
                         setKnownWords(knownWordsCopy)
                         setWord({})
                     } else {
@@ -52,7 +52,7 @@ const ViewTextEditor = ({ wordToEdit, knownWords, setKnownWords }) => {
                     if (resp.status === 201) {
                         setNotification(`Term "${word.word}" was successfully created.`)
                         let knownWordsCopy = JSON.parse(JSON.stringify(knownWords))
-                        knownWordsCopy[word.word] = editedWord
+                        knownWordsCopy[word.word.toLowerCase()] = editedWord
                         setKnownWords(knownWordsCopy)
                         setWord({})
                     } else {

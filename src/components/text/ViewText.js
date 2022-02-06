@@ -65,6 +65,7 @@ const ViewText = ({ textId, setHeaderState }) => {
                     if (/\w+/gi.test(any)) { // handle words
                         let knownWord = knownWords[any.toLowerCase()]
                         if (knownWord) {
+                            knownWord.word = any
                             return <Word key={i} wordObj={knownWord} setWordToEdit={setWordToEdit}/>
                         } else {
                             let unknownWord = {

@@ -3,6 +3,7 @@ import WordDetails from './WordDetails'
 import './Word.css'
 
 const Word = ({ wordObj, sentence, setWordToEdit }) => {
+    console.log(wordObj)
     const [isHovering, setIsHovering] = useState(false)
 
     const handleWordClick = () => {
