@@ -1,5 +1,6 @@
 .word {
     /* text-decoration: underline; */
+    line-height: 125%;
 }
 
 /* https://www.w3schools.com/css/css_tooltip.asp */
@@ -13,7 +14,7 @@
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 120px;
+    width: 180px;
     background-color: lightgray;
     color: black;
     text-align: left;
@@ -50,6 +51,11 @@
 
 .familiarity-highlight-0 {
     background-color: aquamarine;
+    background-size: contain;
+}
+
+.familiarity-highlight-0, .hover-highlight:hover {
+    /* background-size: 100% 80% */
 }
 
 .familiarity-highlight-1 {

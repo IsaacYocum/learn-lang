@@ -5,7 +5,7 @@ import './Word.css'
 const WordDetails = ({ word, sentence }) => {
     const [wordDetails, setWordDetails] = useState({})
     useEffect(() => {
-        axios.get(`/api/languages/english/words/${word.toLowerCase()}`)
+        axios.get(`/api/languages/${word.language}/words/${word.word.toLowerCase()}`)
             .then(resp => {
                 console.log('wordDetails', resp)
                 if (resp.status === 200) {
@@ -14,7 +14,7 @@ const WordDetails = ({ word, sentence }) => {
             })
             .catch(() => {
                 let unknown = {
-                    "word": word,
+                    "word": word.word,
                     "familiarity": 0,
                     "translation": "unknown"
                 }
@@ -24,11 +24,13 @@ const WordDetails = ({ word, sentence }) => {
 
     return (
         <span className="tooltiptext">
-            {word}
+            {word.word}
             <br></br>
             {wordDetails.translation}
             <br></br>
-            <a href="https://translate.google.com" target="_blank" rel="noopener noreferrer">Translate Sentence</a>
+            Familiarity: {word.familiarity}
+            {/* <br></br>
+            <a href="https://translate.google.com" target="_blank" rel="noopener noreferrer">Translate Sentence</a> */}
         </span>
     )
 }

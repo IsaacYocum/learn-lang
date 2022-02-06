@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import './ViewText.css'
 import Word from '../Word'
+import Split from 'react-split'
+import ViewTextEditor from './ViewTextEditor'
 
 const ViewText = ({ textId, setHeaderState }) => {
+    const [text, setText] = useState({})
     const [isLoading, setIsLoading] = useState(true);
     const [anyCharacter, setAnyCharacter] = useState([])
-    const [definedWords, setDefinedWords] = useState({});
+    const [unknownWords, setUnknownWords] = useState({})
+    const [knownWords, setKnownWords] = useState({});
+    const [wordToEdit, setWordToEdit] = useState({})
 
     useEffect(() => {
         axios.get(`/api/texts/${textId}`)
@@ -14,6 +20,8 @@ const ViewText = ({ textId, setHeaderState }) => {
                     "title": resp.data.title,
                     "text": resp.data
                 })
+
+                setText(resp.data)
 
                 let textData = resp.data.text
                 console.log('text', typeof textData)
@@ -31,13 +39,13 @@ const ViewText = ({ textId, setHeaderState }) => {
                 console.log("filtered", filteredWords)
 
                 // Front load all word definitions from the DB
-                axios.post(`/api/languages/english/getTextWords`, filteredWords)
+                axios.post(`/api/languages/${resp.data.language}/getTextWords`, filteredWords)
                     .then(wordsFromDb => {
                         let definedWordsObj = {};
                         wordsFromDb.data.forEach(element => {
                             definedWordsObj[element.word] = element;
                         })
-                        setDefinedWords(definedWordsObj)
+                        setKnownWords(definedWordsObj)
 
                         setIsLoading(false)
                     })
@@ -49,27 +57,23 @@ const ViewText = ({ textId, setHeaderState }) => {
     }
 
     return (
-        <div>
-            <div className='textBody'>
+        <Split style={{ display: `flex`, height: `calc(100vh - 10rem)` }}>
+            <div id="textPane" className='textPane'>
                 {console.log('anyCharacter', anyCharacter)}
-                {console.log('definedWords', definedWords)}
+                {console.log('definedWords', knownWords)}
                 {anyCharacter.map((any, i) => {
                     if (/\w+/gi.test(any)) { // handle words
-                        let knownWord = definedWords[any.toLowerCase()]
+                        let knownWord = knownWords[any.toLowerCase()]
                         if (knownWord) {
-                            let word = {
-                                "word": any,
-                                "familiarity": knownWord.familiarity,
-                                "translation": knownWord.translation
-                            }
-                            return <Word key={i} wordObj={word} />
+                            return <Word key={i} wordObj={knownWord} setWordToEdit={setWordToEdit}/>
                         } else {
                             let unknownWord = {
                                 "word": any,
                                 "familiarity": 0,
-                                "translation": "unknown"
+                                "translation": "unknown",
+                                "language": text.language
                             }
-                            return <Word key={i} wordObj={unknownWord} />
+                            return <Word key={i} wordObj={unknownWord} setWordToEdit={setWordToEdit}/>
                         }
                     } else if (/\n+/g.test(any)) { // handle new lines
                         return (
@@ -82,8 +86,15 @@ const ViewText = ({ textId, setHeaderState }) => {
                         return <span key={i}>{any}</span>
                     }
                 })}
+
             </div>
-        </div>
+            <Split direction="vertical" style={{ width: '50vw' }}>
+                <div id="notificationPane" className='notificationPane'>
+                    <ViewTextEditor wordToEdit={wordToEdit} knownWords={knownWords} setKnownWords={setKnownWords}/>
+                </div>
+                <div id="dictionaryPane" className='dictionaryPane'></div>
+            </Split>
+        </Split>
     )
 }
 

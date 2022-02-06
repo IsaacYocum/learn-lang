@@ -2,16 +2,22 @@ import React, { useState } from 'react'
 import WordDetails from './WordDetails'
 import './Word.css'
 
-const Word = ({ wordObj, sentence }) => {
+const Word = ({ wordObj, sentence, setWordToEdit }) => {
     const [isHovering, setIsHovering] = useState(false)
+
+    const handleWordClick = () => {
+        console.log('Clicked on: ', wordObj)
+        setWordToEdit(wordObj)
+    }
 
     if (isHovering) {
         return (
             <span className='tooltip'>
-                <span className={`word hover-highlight familiarity-highlight-${wordObj.familiarity}`}>
+                <span className={`word hover-highlight familiarity-highlight-${wordObj.familiarity}`}
+                    onClick={handleWordClick}>
                     {wordObj.word}
                 </span>
-                <WordDetails word={wordObj.word} sentence={sentence} />
+                <WordDetails word={wordObj} sentence={sentence} />
             </span>
         )
     }
@@ -20,7 +26,8 @@ const Word = ({ wordObj, sentence }) => {
         <span className='tooltip'>
             <span className={`word hover-highlight familiarity-highlight-${wordObj.familiarity}`}
                 onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}>
+                onMouseLeave={() => setIsHovering(false)}
+                onClick={handleWordClick}>
                 {wordObj.word}
             </span>
         </span>
