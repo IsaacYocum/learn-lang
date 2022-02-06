@@ -65,16 +65,21 @@ const ViewText = ({ textId, setHeaderState }) => {
                     if (/\w+/gi.test(any)) { // handle words
                         let knownWord = knownWords[any.toLowerCase()]
                         if (knownWord) {
-                            knownWord.word = any
-                            return <Word key={i} wordObj={knownWord} setWordToEdit={setWordToEdit}/>
+                            let knownWordObj = {
+                                "word": any,
+                                "familiarity": knownWord.familiarity,
+                                "translation": knownWord.translation,
+                                "language": text.language
+                            }
+                            return <Word key={i} wordObj={knownWordObj} setWordToEdit={setWordToEdit}/>
                         } else {
-                            let unknownWord = {
+                            let unknownWordObj = {
                                 "word": any,
                                 "familiarity": 0,
                                 "translation": "unknown",
                                 "language": text.language
                             }
-                            return <Word key={i} wordObj={unknownWord} setWordToEdit={setWordToEdit}/>
+                            return <Word key={i} wordObj={unknownWordObj} setWordToEdit={setWordToEdit}/>
                         }
                     } else if (/\n+/g.test(any)) { // handle new lines
                         return (
