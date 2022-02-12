@@ -8,6 +8,7 @@ const Word = ({ wordObj, sentence, setWordToEdit }) => {
 
     const handleWordClick = () => {
         console.log('Clicked on: ', wordObj)
+        wordObj.sentence = sentence.replace(wordObj.word, '{' + wordObj.word + '}')
         setWordToEdit(wordObj)
     }
 

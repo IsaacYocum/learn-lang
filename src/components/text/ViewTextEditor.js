@@ -82,42 +82,46 @@ const ViewTextEditor = ({ wordToEdit, knownWords, setKnownWords }) => {
                     {/* <input type="text" value={editedFamiliarity} onChange={handleFamiliarityChange} /> */}
                     <br></br>
                     <div>
-                        <label>
+                        <label className='familiarity-highlight-0'>
                             [
                             <input type="radio" value="0" checked={editedFamiliarity === 0} onChange={handleFamiliarityChange}/>
                             unknown]
                         </label>
                         &nbsp;
-                        <label>
+                        <label className='familiarity-highlight-1'>
                             [
                             <input type="radio" value="1" checked={editedFamiliarity === 1} onChange={handleFamiliarityChange}/>
                             1]
                         </label>
                         &nbsp;
-                        <label>
+                        <label className='familiarity-highlight-2'>
                             [
                             <input type="radio" value="2" checked={editedFamiliarity === 2} onChange={handleFamiliarityChange}/>
                             2]
                         </label>
                         &nbsp;
-                        <label>
+                        <label className='familiarity-highlight-3'>
                             [
                             <input type="radio" value="3" checked={editedFamiliarity === 3} onChange={handleFamiliarityChange}/>
                             3]
                         </label>
                         &nbsp;
-                        <label>
+                        <label className='familiarity-highlight-4'>
                             [
                             <input type="radio" value="4" checked={editedFamiliarity === 4} onChange={handleFamiliarityChange}/>
                             4]
                         </label>
                         &nbsp;
-                        <label>
+                        <label className='familiarity-highlight-5'>
                             [
                             <input type="radio" value="5" checked={editedFamiliarity === 5} onChange={handleFamiliarityChange}/>
                             5]
                         </label>
                     </div>
+                    <br></br>
+                    <label>Sentence:</label>
+                    <br></br>
+                    <textarea value={wordToEdit.sentence} readOnly={true} rows='5' cols='50'></textarea>
                     <br></br>
                     <input type="submit" value="Submit"></input>
                 </form>

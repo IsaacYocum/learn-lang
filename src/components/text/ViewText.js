@@ -5,6 +5,7 @@ import './ViewText.css'
 import Word from '../Word'
 import Split from 'react-split'
 import ViewTextEditor from './ViewTextEditor'
+import Sentence from '../Sentence'
 
 const ViewText = ({ textId, setHeaderState }) => {
     const [text, setText] = useState({})
@@ -56,51 +57,53 @@ const ViewText = ({ textId, setHeaderState }) => {
         return <p>loading...</p>
     }
 
+    let sentences = []
+    let sentence = []
+    anyCharacter.forEach((any, i) => {
+        if (/\w+/gi.test(any)) { // handle words
+            sentence.push(any)
+        } else if (/\n+/g.test(any)) { // handle new lines
+            sentences.push(sentence)
+            sentence = []
+
+            sentence.push('\n')
+
+            sentences.push(sentence)
+            sentence = []
+        } else { // handle any other characters such as punctuation
+            sentence.push(any)
+            if (any === '.' || any === '!' || any === '?' || any === '\n') {
+                sentences.push(sentence)
+                sentence = []
+            }
+        }
+    })
+    console.log('sentences', sentences)
+
     return (
         <div className="body">
             <Split style={{ display: `flex`, height: `calc(100vh - 10rem)` }}>
                 <div id="textPane" className='textPane'>
                     {console.log('anyCharacter', anyCharacter)}
                     {console.log('definedWords', knownWords)}
-                    {anyCharacter.map((any, i) => {
-                        if (/\w+/gi.test(any)) { // handle words
-                            let knownWord = knownWords[any.toLowerCase()]
-                            if (knownWord) {
-                                let knownWordObj = {
-                                    "word": any,
-                                    "familiarity": knownWord.familiarity,
-                                    "translation": knownWord.translation,
-                                    "language": text.language
-                                }
-                                return <Word key={i} wordObj={knownWordObj} setWordToEdit={setWordToEdit} />
-                            } else {
-                                let unknownWordObj = {
-                                    "word": any,
-                                    "familiarity": 0,
-                                    "translation": "unknown",
-                                    "language": text.language
-                                }
-                                return <Word key={i} wordObj={unknownWordObj} setWordToEdit={setWordToEdit} />
-                            }
-                        } else if (/\n+/g.test(any)) { // handle new lines
-                            return (
-                                <span key={i}>
-                                    <br></br>
-                                    <br></br>
-                                </span>
-                            )
-                        } else { // handle any other characters such as punctuation
-                            return <span key={i}>{any}</span>
-                        }
+                    {sentences.map((sentence, i) => {
+                        return <Sentence
+                            key={i}
+                            sentenceArr={sentence}
+                            setWordToEdit={setWordToEdit}
+                            knownWords={knownWords}
+                            language={text.language} />
                     })}
-
                 </div>
                 <Split direction="vertical" style={{ width: '50vw' }}>
                     <div id="notificationPane" className='notificationPane'>
-                        <ViewTextEditor wordToEdit={wordToEdit} knownWords={knownWords} setKnownWords={setKnownWords} />
+                        <ViewTextEditor
+                            wordToEdit={wordToEdit}
+                            knownWords={knownWords}
+                            setKnownWords={setKnownWords} />
                     </div>
                     <div id="dictionaryPane" className='dictionaryPane'>
-                        
+
                     </div>
                 </Split>
             </Split>
