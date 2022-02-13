@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import '../../App.css'
-import './ViewText.css'
+import React, { useEffect, useState } from 'react'
 import Split from 'react-split'
-import ViewTextEditor from './ViewTextEditor'
+import '../../App.css'
+import ViewTextEditorContext from '../../contexts/ViewTextEditorContext'
 import Sentence from '../Sentence'
+import './ViewText.css'
+import ViewTextEditor from './ViewTextEditor'
 
 const ViewText = ({ textId, setHeaderState }) => {
     const [text, setText] = useState({})
@@ -80,33 +81,33 @@ const ViewText = ({ textId, setHeaderState }) => {
     console.log('sentences', sentences)
 
     return (
-        <div className="body">
-            <Split style={{ display: `flex`, height: `calc(100vh - 10rem)` }}>
-                <div id="textPane" className='textPane'>
-                    {console.log('anyCharacter', anyCharacter)}
-                    {console.log('definedWords', knownWords)}
-                    {sentences.map((sentence, i) => {
-                        return <Sentence
-                            key={i}
-                            sentenceArr={sentence}
-                            setWordToEdit={setWordToEdit}
-                            knownWords={knownWords}
-                            language={text.language} />
-                    })}
-                </div>
-                <Split direction="vertical" style={{ width: '50vw' }}>
-                    <div id="notificationPane" className='notificationPane'>
-                        <ViewTextEditor
-                            wordToEdit={wordToEdit}
-                            knownWords={knownWords}
-                            setKnownWords={setKnownWords} />
+        <ViewTextEditorContext.Provider value={{wordToEdit, setWordToEdit}}>
+            <div className="body">
+                <Split style={{ display: `flex`, height: `calc(100vh - 10rem)` }}>
+                    <div id="textPane" className='textPane'>
+                        {console.log('anyCharacter', anyCharacter)}
+                        {console.log('definedWords', knownWords)}
+                        {sentences.map((sentence, i) => {
+                            return <Sentence
+                                key={i}
+                                sentenceArr={sentence}
+                                knownWords={knownWords}
+                                language={text.language} />
+                        })}
                     </div>
-                    <div id="dictionaryPane" className='dictionaryPane'>
+                    <Split direction="vertical" style={{ width: '50vw' }}>
+                        <div id="notificationPane" className='notificationPane'>
+                            <ViewTextEditor
+                                knownWords={knownWords}
+                                setKnownWords={setKnownWords} />
+                        </div>
+                        <div id="dictionaryPane" className='dictionaryPane'>
 
-                    </div>
+                        </div>
+                    </Split>
                 </Split>
-            </Split>
-        </div>
+            </div>
+        </ViewTextEditorContext.Provider>
     )
 }
 

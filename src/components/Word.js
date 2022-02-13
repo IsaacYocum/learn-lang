@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import WordDetails from './WordDetails'
+import React, { useContext, useState } from 'react'
+import ViewTextEditorContext from '../contexts/ViewTextEditorContext'
 import './Word.css'
+import WordDetails from './WordDetails'
 
-const Word = ({ wordObj, sentence, expressionsList, setWordToEdit }) => {
-    // console.log(wordObj)
+const Word = ({ wordObj, sentence, expressionsList }) => {
     const [isHovering, setIsHovering] = useState(false)
+    const {setWordToEdit} = useContext(ViewTextEditorContext)
 
     const handleWordClick = () => {
         console.log('Clicked on: ', wordObj)

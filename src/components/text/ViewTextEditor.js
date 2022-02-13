@@ -1,11 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import ViewTextEditorContext from '../../contexts/ViewTextEditorContext';
 
-const ViewTextEditor = ({ wordToEdit, knownWords, setKnownWords }) => {
-    console.log('wordToEdit', wordToEdit)
+const ViewTextEditor = ({ knownWords, setKnownWords }) => {
     const [word, setWord] = useState({})
     const [editedTranslation, setEditedTranslation] = useState('')
     const [editedFamiliarity, setEditedFamiliarity] = useState(0)
+    const {wordToEdit} = useContext(ViewTextEditorContext)
 
     const [notification, setNotification] = useState('')
 
