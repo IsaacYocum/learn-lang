@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import Home from './components/Home.js'
-import { Switch, Route } from 'react-router-dom';
-import ViewTexts from './components/text/ViewTexts'
-import ViewText from './components/text/ViewText';
+import About from './components/About';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Home from './components/Home.js';
+import ViewLanguage from './components/language/ViewLanguage';
+import ViewLanguages from './components/language/ViewLanguages';
 import AddText from './components/text/AddText';
 import EditText from './components/text/EditText';
-import About from './components/About';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import ViewLanguage from './components/language/ViewLanguage';
-import ViewLanguages from './components/language/ViewLanguages'
+import ViewText from './components/text/ViewText';
+import ViewTexts from './components/text/ViewTexts';
+import HeaderContext from './contexts/HeaderContext';
 
 
 const App = () => {
@@ -22,36 +23,38 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header headerState={headerState} />
+      <HeaderContext.Provider value={{ headerState, setHeaderState }}>
+        <Header />
 
-      <div className="body">
-        <Switch>
-          <Route path="/texts/edittext/:textId" render={props =>
-            <EditText textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
-          </Route>
-          <Route path="/texts/addtext">
-            <AddText setHeaderState={setHeaderState} />
-          </Route>
-          <Route path="/texts/:textId" render={props =>
-            <ViewText textId={props.match.params.textId} setHeaderState={setHeaderState} />}>
-          </Route>
-          <Route path="/texts">
-            <ViewTexts setHeaderState={setHeaderState} />
-          </Route>
-          <Route path="/languages/:language/" render={props =>
-            <ViewLanguage language={props.match.params.language} setHeaderState={setHeaderState} />}>
-          </Route>
-          <Route path="/languages">
-            <ViewLanguages setHeaderState={setHeaderState} />
-          </Route>
-          <Route path="/about">
-            <About setHeaderState={setHeaderState} />
-          </Route>
-          <Route path="/">
-            <Home setHeaderState={setHeaderState} />
-          </Route>
-        </Switch>
-      </div>
+        <div className="body">
+          <Switch>
+            <Route path="/texts/edittext/:textId" render={props =>
+              <EditText textId={props.match.params.textId} />}>
+            </Route>
+            <Route path="/texts/addtext">
+              <AddText />
+            </Route>
+            <Route path="/texts/:textId" render={props =>
+              <ViewText textId={props.match.params.textId} />}>
+            </Route>
+            <Route path="/texts">
+              <ViewTexts />
+            </Route>
+            <Route path="/languages/:language/" render={props =>
+              <ViewLanguage language={props.match.params.language} />}>
+            </Route>
+            <Route path="/languages">
+              <ViewLanguages />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </HeaderContext.Provider>
 
       <Footer />
     </div>

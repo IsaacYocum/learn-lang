@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import HeaderContext from '../contexts/HeaderContext';
 
-const About = ({ setHeaderState }) => {
+const About = () => {
+    const { setHeaderState } = useContext(HeaderContext)
+
     useEffect(() => {
         setHeaderState({
             "title": 'About'

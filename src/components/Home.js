@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import HeaderContext from '../contexts/HeaderContext';
 
-const Home = ({ setHeaderState }) => {
+const Home = () => {
+    const { setHeaderState } = useContext(HeaderContext)
+
     useEffect(() => {
         setHeaderState({
             "title": "Home"

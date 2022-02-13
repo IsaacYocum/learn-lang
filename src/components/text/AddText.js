@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
-import axios from 'axios'
+import HeaderContext from '../../contexts/HeaderContext';
 
-const AddText = ({ setHeaderState }) => {
+const AddText = () => {
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
     const [language, setLanguage] = useState('')
     const [languages, setLanguages] = useState([])
+    const { setHeaderState } = useContext(HeaderContext)
     const history = useHistory()
 
     useEffect(() => {

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
+import HeaderContext from '../../contexts/HeaderContext';
 
-const EditText = ({ textId, setHeaderState }) => {
+const EditText = ({ textId }) => {
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
+    const {setHeaderState} = useContext(HeaderContext)
     const history = useHistory()
 
     useEffect(() => {
@@ -53,7 +55,6 @@ const EditText = ({ textId, setHeaderState }) => {
 
     return (
         <div>
-            <h3>Edit text</h3>
             <form onSubmit={handleSubmit}>
                 <label>
                     Title:

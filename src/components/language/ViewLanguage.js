@@ -1,8 +1,10 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import HeaderContext from '../../contexts/HeaderContext';
 
-const ViewLanguage = ({ language, setHeaderState }) => {
+const ViewLanguage = ({ language }) => {
     const [words, setWords] = useState([])
+    const { setHeaderState } = useContext(HeaderContext)
 
     useEffect(() => {
         setHeaderState({

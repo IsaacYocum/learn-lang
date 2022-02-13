@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
+import HeaderContext from '../contexts/HeaderContext'
 
-const Header = ({ headerState }) => {
+const Header = () => {
+    const { headerState } = useContext(HeaderContext)
     console.log(headerState)
     const history = useHistory()
 

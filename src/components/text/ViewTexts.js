@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import { useHistory } from "react-router-dom";
-import { Link } from 'react-router-dom'
-import axios from 'axios'
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useHistory } from "react-router-dom";
+import HeaderContext from '../../contexts/HeaderContext';
 
-const ViewTexts = ({ setHeaderState }) => {
+const ViewTexts = () => {
     const [language, setLanguage] = useState("")
     const [languages, setLanguages] = useState([])
     const [texts, setTexts] = useState([])
+    const { setHeaderState } = useContext(HeaderContext)
     const history = useHistory()
 
     useEffect(() => {

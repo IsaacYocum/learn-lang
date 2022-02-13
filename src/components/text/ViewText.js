@@ -1,18 +1,20 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Split from 'react-split'
 import '../../App.css'
+import HeaderContext from '../../contexts/HeaderContext'
 import ViewTextEditorContext from '../../contexts/ViewTextEditorContext'
 import Sentence from '../Sentence'
 import './ViewText.css'
 import ViewTextEditor from './ViewTextEditor'
 
-const ViewText = ({ textId, setHeaderState }) => {
+const ViewText = ({ textId }) => {
     const [text, setText] = useState({})
     const [isLoading, setIsLoading] = useState(true);
     const [anyCharacter, setAnyCharacter] = useState([])
     const [knownWords, setKnownWords] = useState({});
     const [wordToEdit, setWordToEdit] = useState({})
+    const { setHeaderState } = useContext(HeaderContext)
 
     useEffect(() => {
         axios.get(`/api/texts/${textId}`)
@@ -81,7 +83,7 @@ const ViewText = ({ textId, setHeaderState }) => {
     console.log('sentences', sentences)
 
     return (
-        <ViewTextEditorContext.Provider value={{wordToEdit, setWordToEdit}}>
+        <ViewTextEditorContext.Provider value={{ wordToEdit, setWordToEdit }}>
             <div className="body">
                 <Split style={{ display: `flex`, height: `calc(100vh - 10rem)` }}>
                     <div id="textPane" className='textPane'>
