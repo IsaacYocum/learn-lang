@@ -31,7 +31,7 @@ const ViewTextEditor = ({ wordToEdit, knownWords, setKnownWords }) => {
         console.log('submit', editedWord)
 
         // Update known word
-        if (knownWords[word.word]) {
+        if (knownWords[word.word.toLowerCase()]) {
             axios.put(`/api/languages/${word.language}/words/${word.word}`, { editedWord })
                 .then(resp => {
                     if (resp.status === 200) {

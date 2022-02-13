@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import WordDetails from './WordDetails'
 import './Word.css'
 
-const Word = ({ wordObj, sentence, setWordToEdit }) => {
+const Word = ({ wordObj, sentence, expressionsList, setWordToEdit }) => {
     // console.log(wordObj)
     const [isHovering, setIsHovering] = useState(false)
 
@@ -19,7 +19,7 @@ const Word = ({ wordObj, sentence, setWordToEdit }) => {
                     onClick={handleWordClick}>
                     {wordObj.word}
                 </span>
-                <WordDetails word={wordObj} sentence={sentence} />
+                <WordDetails word={wordObj} sentence={sentence} expressionsList={expressionsList} />
             </span>
         )
     }

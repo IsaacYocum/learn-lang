@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Word from './Word'
 
 const Sentence = ({ sentenceArr, setWordToEdit, knownWords, language }) => {
     const [sentence, setSentence] = useState(sentenceArr)
-    
-    let sentenceString = ''
-    sentence.forEach(word => {
-        sentenceString = sentenceString + word
-    })
-    sentenceString = sentenceString.trim()
+    const [sentenceString, setSentenceString] = useState('')
+    const [expressionsList, setExpressionsList] = useState([])
+
+    useEffect(() => {
+        let sentenceStr = ''
+        let expressionsLi = []
+        let skipIndex = -1;
+        sentence.forEach((word, i) => {
+            sentenceStr = sentenceStr + word
+
+            if (!/[ .,-]/g.test(word)) {
+                if(skipIndex !== i) {
+                    let tmpWord = word
+                    if (word === "'" && /[a-z]+/g.test(sentence[i + 1])) {
+                        tmpWord = tmpWord + sentence[i + 1]
+                        skipIndex = i + 1
+                    }
+                    expressionsLi.push(tmpWord)
+                }
+            }
+        })
+        setSentenceString(sentenceStr.trim())
+        setExpressionsList(expressionsLi)
+    }, [sentence])
 
     return (
         <span>
@@ -25,6 +43,7 @@ const Sentence = ({ sentenceArr, setWordToEdit, knownWords, language }) => {
                         return <Word key={i}
                             wordObj={knownWordObj}
                             sentence={sentenceString}
+                            expressionsList={expressionsList}
                             setWordToEdit={setWordToEdit} />
                     } else {
                         let unknownWordObj = {
@@ -36,6 +55,7 @@ const Sentence = ({ sentenceArr, setWordToEdit, knownWords, language }) => {
                         return <Word key={i}
                             wordObj={unknownWordObj}
                             sentence={sentenceString}
+                            expressionsList={expressionsList}
                             setWordToEdit={setWordToEdit} />
                     }
                 } else if (/\n+/g.test(word)) { // handle new lines
