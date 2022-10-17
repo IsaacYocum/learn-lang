@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Word from './Word'
 
 const Sentence = ({ sentenceArr, setWordToEdit, knownWords, language }) => {
-    const [sentence, setSentence] = useState(sentenceArr)
+    const [sentence] = useState(sentenceArr)
     const [sentenceString, setSentenceString] = useState('')
     const [expressionsList, setExpressionsList] = useState([])
 
@@ -14,7 +14,7 @@ const Sentence = ({ sentenceArr, setWordToEdit, knownWords, language }) => {
             sentenceStr = sentenceStr + word
 
             if (!/[ .,-]/g.test(word)) {
-                if(skipIndex !== i) {
+                if (skipIndex !== i) {
                     let tmpWord = word
                     if (word === "'" && /[a-z]+/g.test(sentence[i + 1])) {
                         tmpWord = tmpWord + sentence[i + 1]
@@ -32,16 +32,10 @@ const Sentence = ({ sentenceArr, setWordToEdit, knownWords, language }) => {
         <span>
             {sentence.map((word, i) => {
                 if (/\w+/gi.test(word)) { // handle words
-                    let knownWord = knownWords[word.toLowerCase()]
-                    if (knownWord) {
-                        let knownWordObj = {
-                            "word": word,
-                            "familiarity": knownWord.familiarity,
-                            "translation": knownWord.translation,
-                            "language": language
-                        }
+                    if (knownWords[word.toLowerCase().trim()]) {
                         return <Word key={i}
-                            wordObj={knownWordObj}
+                            word={word}
+                            wordObj={knownWords[word.toLowerCase().trim()]}
                             sentence={sentenceString}
                             expressionsList={expressionsList}
                             setWordToEdit={setWordToEdit} />
@@ -53,6 +47,7 @@ const Sentence = ({ sentenceArr, setWordToEdit, knownWords, language }) => {
                             "language": language
                         }
                         return <Word key={i}
+                            word={word}
                             wordObj={unknownWordObj}
                             sentence={sentenceString}
                             expressionsList={expressionsList}

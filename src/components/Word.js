@@ -1,11 +1,10 @@
-import React, { useContext, useState } from 'react'
-import ViewTextEditorContext from '../contexts/ViewTextEditorContext'
+import React, { useState } from 'react'
 import './Word.css'
 import WordDetails from './WordDetails'
 
-const Word = ({ word, wordObj, sentence, expressionsList }) => {
+const Word = ({ word, wordObj, sentence, expressionsList, setWordToEdit }) => {
     const [isHovering, setIsHovering] = useState(false)
-    const { setWordToEdit } = useContext(ViewTextEditorContext)
+    // const { setWordToEdit } = useContext(ViewTextEditorContext)
 
     const handleWordClick = () => {
         console.log('Clicked on: ', wordObj)
@@ -14,7 +13,7 @@ const Word = ({ word, wordObj, sentence, expressionsList }) => {
     }
 
     return (
-        <span className='tooltip'>
+        <span className='tooltip' title={wordObj.translation}>
             <span
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}

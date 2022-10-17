@@ -50,6 +50,7 @@
 
 .hover-highlight:hover {
     background-color: yellow;
+    cursor: pointer;
 }
 
 .familiarity-highlight-0 {

@@ -1,6 +1,6 @@
 .App {
   padding: 0 20px 0 20px;
-  position: relative;
+  position: absolute;
 }
 
 .body {

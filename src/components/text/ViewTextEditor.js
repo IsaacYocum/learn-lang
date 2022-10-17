@@ -1,13 +1,10 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
-import ViewTextEditorContext from '../../contexts/ViewTextEditorContext';
+import React, { useEffect, useState } from 'react';
 
-const ViewTextEditor = ({ knownWords, setKnownWords }) => {
+const ViewTextEditor = ({ knownWords, setKnownWords, wordToEdit }) => {
     const [word, setWord] = useState({})
     const [editedTranslation, setEditedTranslation] = useState('')
     const [editedFamiliarity, setEditedFamiliarity] = useState(0)
-    const {wordToEdit} = useContext(ViewTextEditorContext)
-
     const [notification, setNotification] = useState('')
 
     useEffect(() => {
@@ -68,63 +65,74 @@ const ViewTextEditor = ({ knownWords, setKnownWords }) => {
         return (
             <div className='viewTextEditor'>
                 <form onSubmit={handleSubmit}>
-                    <label>Term:</label>
-                    <br></br>
-                    <input type="text" readOnly={true} value={wordToEdit.word} />
-                    <br></br>
-                    <br></br>
-                    <label>Translation:</label>
-                    <br></br>
-                    <textarea value={editedTranslation} onChange={handleTranslationChange} rows='5' cols='50'></textarea>
-                    <br></br>
-                    <br></br>
-                    <label>Familiarity:</label>
-                    {/* <br></br> */}
-                    {/* <input type="text" value={editedFamiliarity} onChange={handleFamiliarityChange} /> */}
-                    <br></br>
-                    <div>
-                        <label className='familiarity-highlight-0'>
-                            [
-                            <input type="radio" value="0" checked={editedFamiliarity === 0} onChange={handleFamiliarityChange}/>
-                            unknown]
-                        </label>
-                        &nbsp;
-                        <label className='familiarity-highlight-1'>
-                            [
-                            <input type="radio" value="1" checked={editedFamiliarity === 1} onChange={handleFamiliarityChange}/>
-                            1]
-                        </label>
-                        &nbsp;
-                        <label className='familiarity-highlight-2'>
-                            [
-                            <input type="radio" value="2" checked={editedFamiliarity === 2} onChange={handleFamiliarityChange}/>
-                            2]
-                        </label>
-                        &nbsp;
-                        <label className='familiarity-highlight-3'>
-                            [
-                            <input type="radio" value="3" checked={editedFamiliarity === 3} onChange={handleFamiliarityChange}/>
-                            3]
-                        </label>
-                        &nbsp;
-                        <label className='familiarity-highlight-4'>
-                            [
-                            <input type="radio" value="4" checked={editedFamiliarity === 4} onChange={handleFamiliarityChange}/>
-                            4]
-                        </label>
-                        &nbsp;
-                        <label className='familiarity-highlight-5'>
-                            [
-                            <input type="radio" value="5" checked={editedFamiliarity === 5} onChange={handleFamiliarityChange}/>
-                            5]
-                        </label>
-                    </div>
-                    <br></br>
-                    <label>Sentence:</label>
-                    <br></br>
-                    <textarea value={wordToEdit.sentence} readOnly={true} rows='5' cols='50'></textarea>
-                    <br></br>
-                    <input type="submit" value="Submit"></input>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Term:</td>
+                                <td>
+                                    <input type="text" readOnly={true} value={wordToEdit.word} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Translation:</td>
+                                <td>
+                                    <textarea value={editedTranslation} onChange={handleTranslationChange} rows='5' cols='50'></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Familiarity:</td>
+                                <td>
+                                    <label className='familiarity-highlight-0'>
+                                        [
+                                        <input type="radio" value="0" checked={editedFamiliarity === 0} onChange={handleFamiliarityChange} />
+                                        unknown]
+                                    </label>
+                                    &nbsp;
+                                    <label className='familiarity-highlight-1'>
+                                        [
+                                        <input type="radio" value="1" checked={editedFamiliarity === 1} onChange={handleFamiliarityChange} />
+                                        1]
+                                    </label>
+                                    &nbsp;
+                                    <label className='familiarity-highlight-2'>
+                                        [
+                                        <input type="radio" value="2" checked={editedFamiliarity === 2} onChange={handleFamiliarityChange} />
+                                        2]
+                                    </label>
+                                    &nbsp;
+                                    <label className='familiarity-highlight-3'>
+                                        [
+                                        <input type="radio" value="3" checked={editedFamiliarity === 3} onChange={handleFamiliarityChange} />
+                                        3]
+                                    </label>
+                                    &nbsp;
+                                    <label className='familiarity-highlight-4'>
+                                        [
+                                        <input type="radio" value="4" checked={editedFamiliarity === 4} onChange={handleFamiliarityChange} />
+                                        4]
+                                    </label>
+                                    &nbsp;
+                                    <label className='familiarity-highlight-5'>
+                                        [
+                                        <input type="radio" value="5" checked={editedFamiliarity === 5} onChange={handleFamiliarityChange} />
+                                        5]
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sentence:</td>
+                                <td>
+                                    <textarea value={wordToEdit.sentence} readOnly={true} rows='5' cols='50'></textarea>
+                                </td>
+                            </tr>
+                            <tr className='viewTextEditorSubmit'>
+                                <td></td>
+                                <td>
+                                    <input align='right' type="submit" value="Submit"></input>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </form>
             </div>
         )
