@@ -4,7 +4,6 @@ import WordDetails from './WordDetails'
 
 const Word = ({ word, wordObj, sentence, expressionsList, setWordToEdit }) => {
     const [isHovering, setIsHovering] = useState(false)
-    // const { setWordToEdit } = useContext(ViewTextEditorContext)
 
     const handleWordClick = () => {
         console.log('Clicked on: ', wordObj)
@@ -12,14 +11,20 @@ const Word = ({ word, wordObj, sentence, expressionsList, setWordToEdit }) => {
         setWordToEdit(wordObj)
     }
 
+    let title = `${wordObj.word}\n\u25b6 ${wordObj.translation}\n\u25b6 ${wordObj.familiarity}`
+
     return (
-        <span className='tooltip' title={wordObj.translation}>
+        <span className='tooltip'>
             <span
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
-                onClick={handleWordClick}
+                
             >
-                <span className={`word hover-highlight familiarity-highlight-${wordObj.familiarity}`}>
+                <span
+                    className={`word hover-highlight familiarity-highlight-${wordObj.familiarity}`}
+                    title={title}
+                    onClick={handleWordClick}
+                >
                     {word}
                 </span>
                 {isHovering ? <WordDetails word={wordObj} sentence={sentence} expressionsList={expressionsList} /> : null}

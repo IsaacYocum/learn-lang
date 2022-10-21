@@ -38,10 +38,14 @@ const WordDetails = ({ word, sentence, expressionsList }) => {
 
     }, [word, expressionsList])
 
+    const handleClick = (e) => {
+        console.log(e, trimedExpressionList)
+    }
+
     let translateUrl = `https://translate.google.com/?ie=UTF-8&sl=auto&tl=vi&text=${sentence}`;
 
     return (
-        <span className="tooltiptext" title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa">
+        <span className="tooltiptext">
             <b>Word: </b>{word.word}
             <br></br>
             <b>Translation: </b>{word.translation}
@@ -53,7 +57,13 @@ const WordDetails = ({ word, sentence, expressionsList }) => {
                 if (i < trimedExpressionList.length) {
                     return (
                         <span key={i}>
-                            <a href='#'>{i + 1 + '..' + word}</a>&nbsp;
+                            <button
+                                className='buttonThatLooksLikeALink'
+                                onClick={() => handleClick()}
+                            >
+                                {i + 1 + '..' + word}
+                            </button>
+                            &nbsp;
                         </span>)
                 }
                 return null;
