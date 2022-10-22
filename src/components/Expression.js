@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Word.css'
 import WordDetails from './WordDetails'
 
-const Word = ({ word, wordObj, sentence, expressionsList, setWordToEdit }) => {
+const Expression = ({ word, wordObj, sentence, expressionsList, setWordToEdit }) => {
     const [isHovering, setIsHovering] = useState(false)
 
     const handleWordClick = () => {
@@ -61,4 +61,4 @@ const Word = ({ word, wordObj, sentence, expressionsList, setWordToEdit }) => {
     }
 }
 
-export default Word
+export default Expression
