@@ -1,61 +1,78 @@
 import React, { useEffect, useState } from 'react';
-import _ from 'lodash';
+import reactStringReplace from 'react-string-replace';
 import Word from './Word'
+import Expression from './Expression';
 
-const Sentence = ({ sentenceString, setWordToEdit, knownWords, language }) => {
-    const [expressionsList, setExpressionsList] = useState([])
+const Sentence = ({ sentenceString, setWordToEdit, knownWords, filteredExpressions, language }) => {
+    const [parsedSentence, setParsedSentence] = useState([])
 
     useEffect(() => {
-        console.log(knownWords)
-        let splitSentence = sentenceString.match(/\w+'*\w*/g);
-        console.log('splitSentence', splitSentence)
-        // console.log(splitSentence)
-        let sentenceOptions = splitSentence.map(sentence => {
-            return _.pickBy(knownWords, (value, key) =>
-                _.some(sentence, str => _.includes(key, str.toLowerCase()))
-            )
-        })
-        console.log('sentenceOptions', sentenceOptions)
-        
-    }, [sentenceString, knownWords])
+        let sentenceToParse = sentenceString
 
-    return ( <span>{sentenceString}</span>  
-        // <span>
-        //     {sentence.map((word, i) => {
-        //         if (/\w+/gi.test(word)) { // handle words
-        //             if (knownWords[word.toLowerCase().trim()]) {
-        //                 return <Word key={i}
-        //                     word={word}
-        //                     wordObj={knownWords[word.toLowerCase().trim()]}
-        //                     sentence={sentenceString}
-        //                     expressionsList={expressionsList}
-        //                     setWordToEdit={setWordToEdit} />
-        //             } else {
-        //                 let unknownWordObj = {
-        //                     "word": word,
-        //                     "familiarity": 0,
-        //                     "translation": "unknown",
-        //                     "language": language
-        //                 }
-        //                 return <Word key={i}
-        //                     word={word}
-        //                     wordObj={unknownWordObj}
-        //                     sentence={sentenceString}
-        //                     expressionsList={expressionsList}
-        //                     setWordToEdit={setWordToEdit} />
-        //             }
-        //         } else if (/\n+/g.test(word)) { // handle new lines
-        //             return (
-        //                 <span key={i}>
-        //                     <br></br>
-        //                     <br></br>
-        //                 </span>
-        //             )
-        //         } else { // handle any other characters such as punctuation
-        //             return <span key={i}>{word}</span>
-        //         }
-        //     })}
-        // </span>
+        // Parse expressions
+        filteredExpressions.forEach((expression, wordIndex) => {
+            let regex = new RegExp(`(${expression})`, "ig")
+            sentenceToParse = reactStringReplace(sentenceToParse, regex, (match, i) => {
+                return <Expression
+                    key={match + wordIndex + i}
+                    word={match}
+                    wordObj={knownWords.expressions[match.toLowerCase()]}
+                    sentence={replaceWordInSentence(match, sentenceString)}
+                    expressionsList={[]}
+                    setWordToEdit={setWordToEdit}
+                />
+            })
+        })
+
+        // Parse everything else
+        sentenceToParse = reactStringReplace(sentenceToParse, /(\w+'*’*\w*|\n| )/gi, (match, i) => {
+            // Handle new lines
+            if (match === '\n') {
+                return (<br key={'newline' + match + i}></br>)
+            }
+
+            // Handle anything else that isn't a word
+            if (!/\w+/g.test(match)) {
+                return <span key={'notAWord' + match + i + Math.random()}>{match}</span>
+            }
+
+            // Everything past this point should be a single-word word
+            let wordObj;
+            if (knownWords.words[match.toLowerCase()]) {
+                wordObj = knownWords.words[match.toLowerCase()]
+            } else {
+                wordObj = {
+                    "word": match,
+                    "familiarity": 0,
+                    "translation": "unknown",
+                    "language": language
+                }
+            }
+
+            // Handle word
+            return <Word
+                key={match + i}
+                word={match}
+                wordObj={wordObj}
+                sentence={replaceWordInSentence(match, sentenceString)}
+                expressionsList={[]}
+                setWordToEdit={setWordToEdit} />
+        })
+
+        setParsedSentence(sentenceToParse)
+
+    }, [sentenceString, knownWords, filteredExpressions, language, setWordToEdit])
+
+    const replaceWordInSentence = (word, sentence) => {
+        let regex = new RegExp(`(${word})`)
+        return sentence.replace(regex, '{$1}').trim()
+    }
+
+    return (
+        <span>
+            {parsedSentence}
+            &nbsp;
+        </span>
     );
 };
 

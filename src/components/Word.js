@@ -6,9 +6,9 @@ const Word = ({ word, wordObj, sentence, expressionsList, setWordToEdit }) => {
     const [isHovering, setIsHovering] = useState(false)
 
     const handleWordClick = () => {
-        // console.log('Clicked on: ', wordObj)
-        // wordObj.sentence = sentence.replace(wordObj.word, '{' + wordObj.word + '}')
-        // setWordToEdit(wordObj)
+        console.log('Clicked on: ', wordObj)
+        wordObj.sentence = sentence.replace(wordObj.word, '{' + wordObj.word + '}')
+        setWordToEdit(wordObj)
     }
 
     // let title = `${wordObj.word}\n\u25b6 ${wordObj.translation}\n\u25b6 ${wordObj.familiarity}`

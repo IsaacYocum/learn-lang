@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { words } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
 const ViewTextEditor = ({ knownWords, setKnownWords, wordToEdit }) => {
@@ -29,13 +30,19 @@ const ViewTextEditor = ({ knownWords, setKnownWords, wordToEdit }) => {
         console.log('submit', editedWord)
 
         // Update known word
-        if (knownWords[word.word.toLowerCase()]) {
+        if (knownWords.words[word.word.toLowerCase()] || knownWords.expressions[word.word.toLowerCase()]) {
             axios.put(`/api/languages/${word.language}/words/${word.word}`, { editedWord })
                 .then(resp => {
                     if (resp.status === 200) {
                         setNotification(`Term "${word.word}" was successfully updated.`)
                         let knownWordsCopy = JSON.parse(JSON.stringify(knownWords))
-                        knownWordsCopy[word.word.toLowerCase()] = editedWord
+
+                        if (word.word.includes(' ')) {
+                            knownWordsCopy.expressions[word.word.toLowerCase()] = editedWord
+                        } else {
+                            knownWordsCopy.words[word.word.toLowerCase()] = editedWord
+                        }
+                       
                         setKnownWords(knownWordsCopy)
                         setWord({})
                     } else {
