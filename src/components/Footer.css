@@ -1,7 +1,30 @@
 .footer {
     font-size: small;
+    margin-bottom: 5px;
+    display: grid;
+    grid-template-areas:
+        'horizontalRule horizontalRule'
+        'builtWith builtWith'
+        'gitHubLogo gitLinks';
+    grid-template-columns: auto 1fr;
+    gap: 3px;
 }
 
+.horizontalRule {
+    grid-area: horizontalRule;
+}
+
+.builtWith {
+    grid-area: builtWith;
+}
+
+.gitHubLogo {
+    grid-area: gitHubLogo;
+}
+
+.gitLinks {
+    grid-area: gitLinks;
+}
 /* .row {
     display: flex;
 }
