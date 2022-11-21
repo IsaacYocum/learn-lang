@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import './Word.css'
 import WordDetails from './WordDetails'
 
-const Word = ({ word, wordObj, sentence, expressionsList, setWordToEdit }) => {
+const Expression = ({ word, wordObj, sentence, expressionsList, setWordToEdit }) => {
     const [isHovering, setIsHovering] = useState(false)
 
     const handleWordClick = () => {
         console.log('Clicked on: ', wordObj)
-        wordObj.sentence = sentence.replace(wordObj.word, '{' + wordObj.word + '}')
+
         setWordToEdit(wordObj)
     }
 
@@ -20,6 +20,8 @@ const Word = ({ word, wordObj, sentence, expressionsList, setWordToEdit }) => {
     //         </span>
     //     )
     // }
+
+
     if (wordObj) {
         return (
             <span className='tooltip'>
@@ -61,4 +63,4 @@ const Word = ({ word, wordObj, sentence, expressionsList, setWordToEdit }) => {
     }
 }
 
-export default Word
+export default Expression

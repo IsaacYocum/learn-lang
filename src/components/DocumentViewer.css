@@ -1,5 +1,5 @@
 .documentViewer {
     display: flex;
-    height: calc(86vh);
-    
+    flex: 1; 
+    overflow: scroll;
 }
