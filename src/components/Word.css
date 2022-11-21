@@ -1,0 +1,100 @@
+.word {
+    /* text-decoration: underline; */
+    line-height: 125%;
+}
+
+/* https://www.w3schools.com/css/css_tooltip.asp */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    
+    /* border-bottom: 1px dotted black; */
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    height: auto;
+    overflow-wrap: break-word;
+    background-color: lightgray;
+    color: black;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px;
+    border: black;
+    font-size: medium;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1010;
+    top: 100%;
+    left: 50%;
+    margin-left: -35px;
+}
+
+/* .tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 100%; 
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+  } 
+*/
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.hover-highlight:hover {
+    background-color: yellow;
+    cursor: pointer;
+}
+
+.familiarity-highlight-0 {
+    background-color: aquamarine;
+}
+
+.familiarity-highlight-1 {
+    text-decoration: underline;
+    text-decoration-color: red;
+    text-decoration-thickness: 3px;
+}
+
+.familiarity-highlight-2 {
+    text-decoration: underline;
+    text-decoration-color: orange;
+    text-decoration-thickness: 3px;
+}
+
+.familiarity-highlight-3 {
+    text-decoration: underline;
+    text-decoration-color: yellow;
+    text-decoration-thickness: 3px;
+}
+
+.familiarity-highlight-4 {
+    text-decoration: underline;
+    text-decoration-color: green;
+    text-decoration-thickness: 3px;
+}
+
+.familiarity-highlight-5 {
+    text-decoration: underline;
+    text-decoration-color: blue;
+    text-decoration-thickness: 3px;
+}
+
+.buttonThatLooksLikeALink {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+  }

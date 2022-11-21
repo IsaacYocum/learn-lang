@@ -1,4 +1,22 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px 0 20px;
+  height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  overflow: scroll;
+}
+
+/* .body {
+  z-index: 100;
+  position: relative;
+} */
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +53,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
