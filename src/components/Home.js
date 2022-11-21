@@ -20,6 +20,8 @@ const Home = () => {
                 <br></br>
                 <Link to="/languages">View Languages</Link>
                 <br></br>
+                <Link to="/settings">Settings</Link>
+                <br></br>
                 <Link to="/about">About</Link>
             </nav>
         </div>

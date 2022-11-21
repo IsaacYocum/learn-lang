@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Home from './components/Home.js';
 import ViewLanguage from './components/language/ViewLanguage';
 import ViewLanguages from './components/language/ViewLanguages';
+import { Settings } from './components/settings/Settings';
 import AddText from './components/text/AddText';
 import EditText from './components/text/EditText';
 import ViewTexts from './components/text/ViewTexts';  
@@ -50,6 +51,9 @@ const App = () => {
             </Route>
             <Route path="/about">
               <About />
+            </Route>
+            <Route path="/settings">
+              <Settings />
             </Route>
             <Route path="/">
               <Home />

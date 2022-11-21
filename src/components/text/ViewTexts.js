@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
+import './ViewTexts.css'
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import HeaderContext from '../../contexts/HeaderContext';
@@ -62,7 +63,7 @@ const ViewTexts = () => {
     }
 
     return (
-        <div>
+        <div className="viewTexts">
             <label>Select language: </label>
             <select value={language} onChange={handleSelectChange}>
                 {languages.map((language, i) => {

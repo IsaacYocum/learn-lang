@@ -10,6 +10,10 @@ a {
     margin-right: 5px;
 }
 
+.viewTexts {
+    width: 100%;
+}
+
 /* .hidden {
     margin-right: 5px;
     display: none;
