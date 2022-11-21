@@ -20,16 +20,32 @@ const TextViewer = ({ text, knownWords, setWordToEdit }) => {
     }, [text, knownWords, setWordToEdit])
 
     return (
-        sentences.map((sentence, i) => {
-            return <Sentence
-                key={i}
-                sentenceString={sentence}
-                setWordToEdit={setWordToEdit}
-                knownWords={knownWords}
-                filteredExpressions={sortedFilteredDescExpressions}
-                language={text.language}
-            />
-        })
+        <>
+            {sentences.map((sentence, i) => {
+                return <Sentence
+                    key={i}
+                    sentenceString={sentence}
+                    setWordToEdit={setWordToEdit}
+                    knownWords={knownWords}
+                    filteredExpressions={sortedFilteredDescExpressions}
+                    language={text.language}
+                />
+            })}
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        </>
     )
 }
 
