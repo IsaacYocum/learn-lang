@@ -4,7 +4,7 @@ import Sentence from '../Sentence'
 import './ViewText.css'
 
 const TextViewer = ({ text, knownWords, setWordToEdit }) => {
-    const [sentences] = useState(text.text.match(/[^.!?]+[.!?]+/g))
+    const [sentences] = useState(text.text.match(/[^.!?]+[.!?\n]+/g))
     const [sortedFilteredDescExpressions, setSortedFilteredDescExpressions] = useState([])
 
     useEffect(() => {

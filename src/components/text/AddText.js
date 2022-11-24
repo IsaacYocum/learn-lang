@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
+import { Button } from '@mui/material';
 import HeaderContext from '../../contexts/HeaderContext';
 
 const AddText = () => {
@@ -79,7 +80,7 @@ const AddText = () => {
                     <textarea value={text} onChange={handleTextChange} rows='15' cols='50'></textarea>
                 </label>
                 <br></br>
-                <input type="submit" value="Submit"></input>
+                <Button type="submit" value="Submit"></Button>
             </form>
         </div>
     )

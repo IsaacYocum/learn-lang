@@ -10,6 +10,7 @@ import './ViewTexts.css'
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import HeaderContext from '../../contexts/HeaderContext';
+import { Button } from '@mui/material';
 
 const ViewTexts = () => {
     const [language, setLanguage] = useState("")
@@ -73,7 +74,7 @@ const ViewTexts = () => {
                 })}
             </select>
             &nbsp;
-            <button onClick={handleAddTextClick}>Add Text</button>
+            <Button onClick={handleAddTextClick}>Add Text</Button>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
@@ -96,9 +97,9 @@ const ViewTexts = () => {
                                     </nav>
                                 </TableCell>
                                 <TableCell align="left">
-                                    <button value={text.textId} onClick={handleEditClick}>Edit</button>
+                                    <Button value={text.textId} onClick={handleEditClick}>Edit</Button>
                                     &nbsp;
-                                    <button value={text.textId} onClick={handleDeleteClick}>Delete</button>
+                                    <Button value={text.textId} onClick={handleDeleteClick}>Delete</Button>
                                 </TableCell>
                             </TableRow>
                         ))}
