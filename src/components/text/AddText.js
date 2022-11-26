@@ -46,7 +46,7 @@ const AddText = () => {
             "language": language
         }
 
-        axios.post('/api/addtext', newText)
+        axios.post('/api/texts', newText)
             .then(resp => {
                 if (resp.status === 201) {
                     history.push('/texts')
@@ -80,7 +80,7 @@ const AddText = () => {
                     <textarea value={text} onChange={handleTextChange} rows='15' cols='50'></textarea>
                 </label>
                 <br></br>
-                <Button type="submit" value="Submit"></Button>
+                <Button type="submit" value="Submit">Add</Button>
             </form>
         </div>
     )

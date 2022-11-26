@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import './Word.css'
 import WordDetails from './WordDetails'
+import { Tooltip } from '@mui/material'
+import {Fragment} from 'react'
 
 const Word = ({ word, wordObj, sentence, expressionsList, setWordToEdit }) => {
     const [isHovering, setIsHovering] = useState(false)
@@ -28,14 +30,19 @@ const Word = ({ word, wordObj, sentence, expressionsList, setWordToEdit }) => {
                     onMouseLeave={() => setIsHovering(false)}
 
                 >
-                    <span
-                        className={`word hover-highlight familiarity-highlight-${wordObj.familiarity}`}
-                        // title={title}
-                        onClick={handleWordClick}
-                    >
-                        {word}
-                    </span>
-                    {isHovering ? <WordDetails word={wordObj} sentence={sentence} expressionsList={expressionsList} /> : null}
+                    <Tooltip title={
+                            <Fragment>
+                                <WordDetails word={wordObj} sentence={sentence} expressionsList={expressionsList} /> 
+                            </Fragment>
+                        } >
+                        <span
+                            className={`word hover-highlight familiarity-highlight-${wordObj.familiarity}`}
+                            // title={title}
+                            onClick={handleWordClick}
+                        >
+                            {word}
+                        </span>
+                    </Tooltip>
                 </span>
             </span>
         )

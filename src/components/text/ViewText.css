@@ -1,6 +1,6 @@
 .textPane, .notificationPane, .dictionaryPane {
     overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-x: scroll;
 }
 
 .gutter {

@@ -45,7 +45,7 @@ const WordDetails = ({ word, sentence, expressionsList }) => {
     let translateUrl = `https://translate.google.com/?ie=UTF-8&sl=auto&tl=vi&text=${sentence}`;
 
     return (
-        <span className="tooltiptext">
+        <span style={{fontSize: 'medium'}} className="tooltiptext">
             <b>Word: </b>{word.word}
             <br></br>
             <b>Translation: </b>{word.translation}
