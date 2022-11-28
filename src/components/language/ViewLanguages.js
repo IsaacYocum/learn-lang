@@ -21,49 +21,54 @@ const ViewLanguage = () => {
             "title": "View Languages"
         })
 
-        axios.get('/api/languages/languagesdetails')
+        getLanguages()
+    }, [setHeaderState])
+
+    const getLanguages = () => {
+        axios.get('/api/languages')
             .then(languagesJson => {
                 setLanguages(languagesJson.data)
             })
-    }, [setHeaderState])
+    }
 
     const handleAddClick = () => (
-        history.push('/languages/addlanguage')
+        history.push('/languages/add')
     )
 
-    const handleEditClick = () => (
-        history.push('/texts/addtext')
+    const handleEditClick = (language) => (
+        history.push(`/languages/${language}/edit`)
     )
 
-    const handleDeleteClick = () => (
-       console.log('handle delete') 
+    const handleDeleteClick = (language) => (
+        axios.delete(`/api/languages/${language}`)
+        .then(resp => {
+            if (resp.status === 200) {
+                getLanguages()
+            }
+        })
     )
 
     return (
         <div style={{width: '100vw'}}>
-            <Button  onClick={handleAddClick}>Add language</Button>
+            <Button variant="contained" onClick={handleAddClick}>Add language</Button>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Language</TableCell>
-                            <TableCell align="right">Texts</TableCell>
-                            <TableCell align="right">Terms</TableCell>
-                            <TableCell >Options</TableCell>
+                            <TableCell align="center">Options</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {languages.map((language) => (
                             <TableRow
-                                key={language.id}
+                                key={language.language}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell component="th" scope="row">{language.id}</TableCell>
-                                <TableCell align="right">{language.Texts}</TableCell>
-                                <TableCell align="right">{language.Words}</TableCell>
-                                <TableCell>
-                                    <Button onClick={handleEditClick}>Edit</Button>
-                                    <Button onClick={handleDeleteClick}>Delete</Button>
+                                <TableCell component="th" scope="row">{language.language}</TableCell>
+                                <TableCell align="center">
+                                    <Button onClick={() => handleEditClick(language.language)}>Edit</Button>
+                                    <Button onClick={() => handleDeleteClick(language.language)}>Delete</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

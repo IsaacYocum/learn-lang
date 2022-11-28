@@ -7,8 +7,8 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './components/Home.js';
 import ViewLanguage from './components/language/ViewLanguage';
-import AddLanguage from './components/language/AddLanguage';
 import ViewLanguages from './components/language/ViewLanguages';
+import AddEditLanguage from './components/language/AddEditLanguage';
 import { Settings } from './components/settings/Settings';
 import AddText from './components/text/AddText';
 import EditText from './components/text/EditText';
@@ -49,8 +49,11 @@ const App = () => {
                             <Route path="/texts">
                                 <ViewTexts />
                             </Route>
-                            <Route path="/languages/:addlanguage/" render={props =>
-                                <AddLanguage language={props.match.params.language} />}>
+                            <Route path="/languages/add/" render={props =>
+                                <AddEditLanguage language={props.match.params.language} action="add" />}>
+                            </Route>
+                            <Route path="/languages/:language/edit/" render={props =>
+                                <AddEditLanguage language={props.match.params.language} action="edit" />}>
                             </Route>
                             <Route path="/languages/:language/" render={props =>
                                 <ViewLanguage language={props.match.params.language} />}>
