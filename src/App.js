@@ -37,10 +37,10 @@ const App = () => {
 
                     <div id="content" className="content">
                         <Switch>
-                            <Route path="/texts/edittext/:textId" render={props =>
+                            <Route path="/texts/:textId/edit" render={props =>
                             <EditText textId={props.match.params.textId} />}>
                             </Route>
-                            <Route path="/texts/addtext">
+                            <Route path="/texts/add">
                                 <AddText />
                             </Route>
                             <Route path="/texts/:textId" render={props =>
@@ -49,13 +49,13 @@ const App = () => {
                             <Route path="/texts">
                                 <ViewTexts />
                             </Route>
-                            <Route path="/languages/add/" render={props =>
+                            <Route path="/languages/add" render={props =>
                                 <AddEditLanguage language={props.match.params.language} action="add" />}>
                             </Route>
-                            <Route path="/languages/:language/edit/" render={props =>
+                            <Route path="/languages/:language/edit" render={props =>
                                 <AddEditLanguage language={props.match.params.language} action="edit" />}>
                             </Route>
-                            <Route path="/languages/:language/" render={props =>
+                            <Route path="/languages/:language" render={props =>
                                 <ViewLanguage language={props.match.params.language} />}>
                             </Route>
                             <Route path="/languages">

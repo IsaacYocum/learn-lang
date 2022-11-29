@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import HeaderContext from '../../contexts/HeaderContext';
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const ViewLanguage = () => {
     const [languages, setLanguages] = useState([])

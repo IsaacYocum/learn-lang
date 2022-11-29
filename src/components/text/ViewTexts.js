@@ -45,7 +45,7 @@ const ViewTexts = () => {
     }
 
     const handleAddTextClick = () => {
-        history.push('/texts/addtext')
+        history.push('/texts/add')
     }
 
     const handleEditClick = (event) => {
@@ -74,13 +74,14 @@ const ViewTexts = () => {
                 })}
             </select>
             &nbsp;
-            <Button onClick={handleAddTextClick}>Add Text</Button>
+            <br/>
+            <Button onClick={handleAddTextClick} variant="contained">Add Text</Button>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Text</TableCell>
-                            <TableCell>Options</TableCell>
+                            <TableCell align="center">Options</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -96,7 +97,7 @@ const ViewTexts = () => {
                                         </Link>
                                     </nav>
                                 </TableCell>
-                                <TableCell align="left">
+                                <TableCell align="center">
                                     <Button value={text.textId} onClick={handleEditClick}>Edit</Button>
                                     &nbsp;
                                     <Button value={text.textId} onClick={handleDeleteClick}>Delete</Button>

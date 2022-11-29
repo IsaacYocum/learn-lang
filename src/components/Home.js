@@ -16,7 +16,7 @@ const Home = () => {
             <nav>
                 <Link to="/texts">View Texts</Link>
                 <br></br>
-                <Link to="/texts/addtext">Add Text</Link>
+                <Link to="/texts/add">Add Text</Link>
                 <br></br>
                 <Link to="/languages">View Languages</Link>
                 <br></br>

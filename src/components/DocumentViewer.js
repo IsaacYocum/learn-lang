@@ -5,15 +5,22 @@ import ViewTextEditor from './text/ViewTextEditor';
 import './DocumentViewer.css'
 import Split from 'react-split'
 import axios from 'axios'
+import Button from '@mui/material/Button';
+import { useHistory } from "react-router-dom";
 
 const DocumentViewer = ({ textId, setShowFooter }) => {
     const { setHeaderState } = useContext(HeaderContext)
     const [knownWords, setKnownWords] = useState(null);
     const [text, setText] = useState(null)
     const [wordToEdit, setWordToEdit] = useState({})
+    const history = useHistory()
 
     useEffect(() => {
         setShowFooter(false)
+
+        const onEditClick = () => {
+            history.push(`/texts/${textId}/edit`) 
+        }
 
         axios.get(`/api/texts/${textId}`)
             .then(resp => {
@@ -22,7 +29,10 @@ const DocumentViewer = ({ textId, setShowFooter }) => {
 
                 setHeaderState({
                     "title": resp.data.title,
-                    "text": resp.data
+                    "text": resp.data,
+                    buttons: [
+                        <Button key="edit" onClick={() => onEditClick()}>Edit</Button>
+                    ]
                 })
 
                 // Front load all word definitions from the DB
@@ -37,7 +47,7 @@ const DocumentViewer = ({ textId, setShowFooter }) => {
             // Reset show footer on unmount
             setShowFooter(true);
         };
-    }, [textId, setHeaderState, setShowFooter])
+    }, [textId, setHeaderState, setShowFooter, history])
 
     return (
         <Split className='documentViewer'>

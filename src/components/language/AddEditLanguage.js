@@ -35,7 +35,7 @@ const AddEditLanguage = (props) => {
                     }
                 })
         }       
-    }, [setHeaderState, props.language])
+    }, [setHeaderState, props.language, props.action])
 
     const onCancel = () => {
         history.push('/languages');

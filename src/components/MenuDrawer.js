@@ -31,13 +31,10 @@ export default function MenuDrawer() {
                         <Link to="/">Home</Link>
                     </ListItem>
                     <ListItem key={'textsNav'} >
-                        <Link to="/texts">View Texts</Link>
-                    </ListItem>
-                    <ListItem key={'addtextsNav'} >
-                        <Link to="/texts/addtext">Add Text</Link>
+                        <Link to="/texts">Texts</Link>
                     </ListItem>
                     <ListItem key={'languagesNav'} >
-                        <Link to="/languages">View Languages</Link>
+                        <Link to="/languages">Languages</Link>
                     </ListItem>
                     <ListItem key={'settingsNav'} >
                         <Link to="/settings">Settings</Link>
