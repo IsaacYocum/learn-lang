@@ -8,10 +8,11 @@ const Header = () => {
     return (
         <div> 
             {headerState.title}
-            {headerState.buttons ? 
-                    headerState.buttons.map(button => {
-                        return button;
-                    }) : null
+            {headerState.buttons 
+                ? headerState.buttons.map(button => {
+                    return button;
+                })
+                : null
             }
         </div>
     )

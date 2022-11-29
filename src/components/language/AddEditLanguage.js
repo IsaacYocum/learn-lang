@@ -6,6 +6,11 @@ import axios from 'axios';
 import {Box} from '@mui/system';
 
 const AddEditLanguage = (props) => {
+
+    const buttonStyle = {
+        width: 'auto'
+    }
+
     const emptyForm = {
         language: "",
         dictionary1Uri: "",
@@ -106,7 +111,7 @@ const AddEditLanguage = (props) => {
             }}
             onSubmit={onSubmit}
         >
-            <br></br>
+            <h4>Language Settings</h4>
             <TextField
                 required
                 id="languageField"
@@ -163,8 +168,8 @@ const AddEditLanguage = (props) => {
                 onChange={onRegExpWordCharactersChange}
             />
             <br></br>
-            <Button color="secondary" variant="contained" onClick={onCancel}>Cancel</Button>
-            <Button type="submit" variant="contained">
+            <Button color="secondary" variant="contained" style={buttonStyle} onClick={onCancel}>Cancel</Button>
+            <Button type="submit" variant="contained" style={buttonStyle}>
                 {props.action === "add" ? "Add" : "Save"}
             </Button>
         </Box>
