@@ -18,7 +18,8 @@ const ViewLanguage = () => {
 
     useEffect(() => {
         setHeaderState({
-            "title": "View Languages"
+            title: "View Languages",
+            buttons: null
         })
 
         getLanguages()

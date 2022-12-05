@@ -18,21 +18,24 @@ const DocumentViewer = ({ textId, setShowFooter }) => {
     useEffect(() => {
         setShowFooter(false)
 
-        const onEditClick = () => {
-            history.push(`/texts/${textId}/edit`) 
-        }
-
         axios.get(`/api/texts/${textId}`)
             .then(resp => {
                 setText(resp.data)
                 console.log(resp.data)
 
                 setHeaderState({
-                    "title": resp.data.title,
-                    "text": resp.data,
+                    title: resp.data.title,
+                    text: resp.data,
                     buttons: [
-                        <Button key="edit" onClick={() => onEditClick()}>Edit</Button>
-                    ]
+                        <Button 
+                            key="edit" 
+                            variant="contained" 
+                            onClick={() => history.push(`/texts/${textId}/edit`)}
+                        >
+                            Edit
+                        </Button>
+                    ],
+                    hideLanguageSelector: true 
                 })
 
                 // Front load all word definitions from the DB

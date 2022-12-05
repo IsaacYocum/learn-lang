@@ -7,49 +7,47 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
 import './ViewTexts.css'
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useMemo } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import HeaderContext from '../../contexts/HeaderContext';
+import LanguageContext from '../../contexts/LanguageContext';
 import { Button } from '@mui/material';
 
 const ViewTexts = () => {
-    const [language, setLanguage] = useState("")
-    const [languages, setLanguages] = useState([])
     const [texts, setTexts] = useState([])
     const { setHeaderState } = useContext(HeaderContext)
+    const { languageState } = useContext(LanguageContext)
     const history = useHistory()
 
+    const buttons = useMemo(() =>  [
+        <Button key="addText" onClick={() => history.push('/texts/add')} variant="contained">Add Text</Button>
+    ], [history])
+
+    
+
     useEffect(() => {
+        function retrieveTexts(language) {
+            if (language === languageState) { // without this, a double api call was made
+                axios.get(`/api/languages/${language}/texts`)
+                    .then(textsJson => {
+                        setTexts(textsJson.data)
+                    })
+            }
+        }
+
         setHeaderState({
-            "title": 'Available Texts'
+            title: 'Available Texts',
+            buttons: buttons,
+            callback: retrieveTexts 
         })
 
-        axios.get('/api/languages')
-            .then(languagesJson => {
-                setLanguage(languagesJson.data[0].language)
-                populateTexts(languagesJson.data[0].language)
-                setLanguages(languagesJson.data)
-            })
-    }, [setHeaderState])
+        retrieveTexts(languageState)
 
-    const populateTexts = (language) => {
-        axios.get(`/api/languages/${language}/texts`)
-            .then(textsJson => {
-                setTexts(textsJson.data)
-            })
-    }
+    }, [setHeaderState, history, languageState, buttons ])
 
-    const handleSelectChange = (event) => {
-        setLanguage(event.target.value)
-        populateTexts(event.target.value)
-    }
-
-    const handleAddTextClick = () => {
-        history.push('/texts/add')
-    }
 
     const handleEditClick = (event) => {
-        history.push(`/texts/edittext/${event.target.value}`)
+        history.push(`/texts/${event.target.value}/edit`)
     }
 
     const handleDeleteClick = (event) => {
@@ -65,17 +63,6 @@ const ViewTexts = () => {
 
     return (
         <div className="viewTexts">
-            <label>Select language: </label>
-            <select value={language} onChange={handleSelectChange}>
-                {languages.map((language, i) => {
-                    return (
-                        <option key={i} value={language.language.toLowerCase()}>{language.language}</option>
-                    )
-                })}
-            </select>
-            &nbsp;
-            <br/>
-            <Button onClick={handleAddTextClick} variant="contained">Add Text</Button>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
@@ -85,7 +72,7 @@ const ViewTexts = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {texts.map((text) => (
+                        {texts && texts.map((text) => (
                             <TableRow
                                 key={text.textId}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

@@ -74,6 +74,7 @@ const EditText = ({ textId }) => {
                 <input id="saveAndOpen" type="submit" value="Save and open"></input>
             </form>
         </div>
+        
     )
 };
 

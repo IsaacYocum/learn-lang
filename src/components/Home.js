@@ -7,7 +7,7 @@ const Home = () => {
 
     useEffect(() => {
         setHeaderState({
-            "title": "Home"
+            title: "Home"
         })
     }, [setHeaderState])
 

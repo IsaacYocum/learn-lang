@@ -2,3 +2,14 @@
     display: flex;
     align-items: center;
 }
+
+.headerContents {
+    display: flex;
+    flex-direction: row; 
+    width: 100%;
+    align-items: center;
+}
+
+.headerButtons {
+    flex: 1 1;
+}
