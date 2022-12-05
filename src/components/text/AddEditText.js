@@ -40,6 +40,7 @@ const AddEditText = ({language, action, textId}) => {
     }
 
     const createText = async (newText, open) => {
+        console.log(newText)
         await axios.post('/api/texts', newText)
             .then(resp => {
                 console.log(resp.data)
@@ -59,7 +60,7 @@ const AddEditText = ({language, action, textId}) => {
             })
     }
 
-    const onSubmit = async (event) => {
+    const onSubmit = (event) => {
         event.preventDefault();
 
         let text = {
@@ -76,7 +77,7 @@ const AddEditText = ({language, action, textId}) => {
         let text = {
             "title": titleState,
             "text": textState,
-            "language": language
+            "language": languageState 
         }
 
         action === "add" ? createText(text, false) : updateText(text, false)

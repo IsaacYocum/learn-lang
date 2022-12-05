@@ -75,18 +75,15 @@ const ViewTexts = () => {
                         {texts && texts.map((text) => (
                             <TableRow
                                 key={text.textId}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                sx={{'&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
                                     <nav>
-                                        <Link to={`/texts/${text.textId}`}>
-                                            {text.title}
-                                        </Link>
+                                        <Link to={`/texts/${text.textId}`}>{text.title}</Link>
                                     </nav>
                                 </TableCell>
                                 <TableCell align="center">
                                     <Button value={text.textId} onClick={handleEditClick}>Edit</Button>
-                                    &nbsp;
                                     <Button value={text.textId} onClick={handleDeleteClick}>Delete</Button>
                                 </TableCell>
                             </TableRow>
